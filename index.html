@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Equity Market — Complete Learning App</title>
+<title>Capital Markets — Equity & Debt Complete Learning App</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -184,8 +184,8 @@ p.body-text{font-size:13px;line-height:1.7;color:var(--muted);margin:6px 0;}
 <!-- ═══════════════ HOME ═══════════════ -->
 <div id="home" class="section active">
   <div class="hero">
-    <h1>Complete <span>Equity Market</span><br>Learning App</h1>
-    <p>Every concept, number, term, law, and example from your chapter — nothing skipped.</p>
+    <h1>Complete <span>Capital Markets</span><br>Learning App</h1>
+    <p>Equity Market + Debt Market — both chapters fully covered, nothing skipped.</p>
   </div>
   <div class="topics-grid">
     <div class="topic-card" onclick="goToSummary('why')"><div class="icon">💡</div><h3>Why Debt & Equity?</h3><p>Intro, shares, features</p></div>
@@ -204,6 +204,21 @@ p.body-text{font-size:13px;line-height:1.7;color:var(--muted);margin:6px 0;}
     <div class="topic-card" onclick="goToSummary('fdi')"><div class="icon">💱</div><h3>FDI, FPI & P-Notes</h3><p>Foreign investment types</p></div>
     <div class="topic-card" onclick="goToSummary('misc2')"><div class="icon">🔧</div><h3>Misc: Green Shoe etc.</h3><p>Demutualization, delisting</p></div>
     <div class="topic-card" onclick="goToSummary('sse')"><div class="icon">🌱</div><h3>Social Stock Exchange</h3><p>SSE, NPO, FPE, ZCZP</p></div>
+  </div>
+  <div style="margin-top:20px;padding:12px 16px;background:var(--surface2);border:1px solid var(--accent);border-radius:12px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--accent);">📘 Chapter 2 — Debt Market</div>
+  <div class="topics-grid" style="margin-top:10px;">
+    <div class="topic-card" onclick="goToSummary('debt-intro')"><div class="icon">💳</div><h3>Intro to Debt</h3><p>Features, Equity vs Debt</p></div>
+    <div class="topic-card" onclick="goToSummary('debt-choice')"><div class="icon">⚖️</div><h3>Debt vs Equity Choice</h3><p>Advantages, disadvantages</p></div>
+    <div class="topic-card" onclick="goToSummary('debt-instruments')"><div class="icon">📜</div><h3>Long-term Debt Instruments</h3><p>Bonds, debentures, G-Secs</p></div>
+    <div class="topic-card" onclick="goToSummary('fccb')"><div class="icon">🌐</div><h3>FCCB, FCEB &amp; New Bonds</h3><p>DIB, SIB, ZCZP</p></div>
+    <div class="topic-card" onclick="goToSummary('tbills')"><div class="icon">🏛️</div><h3>T-Bills &amp; CMBs</h3><p>Govt short-term instruments</p></div>
+    <div class="topic-card" onclick="goToSummary('cd-cp')"><div class="icon">🏦</div><h3>CD &amp; Commercial Paper</h3><p>Corporate short-term debt</p></div>
+    <div class="topic-card" onclick="goToSummary('callmkt')"><div class="icon">📞</div><h3>Call Market &amp; CBLO</h3><p>Interbank borrowing</p></div>
+    <div class="topic-card" onclick="goToSummary('repo')"><div class="icon">🔄</div><h3>Repo &amp; Reverse Repo</h3><p>Liquidity management</p></div>
+    <div class="topic-card" onclick="goToSummary('sdf-triparty')"><div class="icon">🏗️</div><h3>SDF, Triparty &amp; LTRO</h3><p>Advanced liquidity tools</p></div>
+    <div class="topic-card" onclick="goToSummary('rbi-debt')"><div class="icon">🔁</div><h3>RBI &amp; Debt Market</h3><p>NDS-OM, E-Kuber, CCIL</p></div>
+    <div class="topic-card" onclick="goToSummary('debt-reg')"><div class="icon">📋</div><h3>Debt Regulations</h3><p>Public issue, primary dealers</p></div>
+    <div class="topic-card" onclick="goToSummary('libor')"><div class="icon">🌍</div><h3>LIBOR, SOFR &amp; Misc</h3><p>Reference rates, STRIPS, NCD</p></div>
   </div>
 </div>
 
@@ -227,6 +242,18 @@ p.body-text{font-size:13px;line-height:1.7;color:var(--muted);margin:6px 0;}
     <button class="s-btn" onclick="showSummary('fdi',this)">💱 FDI/FPI</button>
     <button class="s-btn" onclick="showSummary('misc2',this)">🔧 Misc</button>
     <button class="s-btn" onclick="showSummary('sse',this)">🌱 SSE</button>
+    <button class="s-btn" onclick="showSummary('debt-intro',this)">💳 Debt Intro</button>
+    <button class="s-btn" onclick="showSummary('debt-choice',this)">⚖️ Debt vs Equity</button>
+    <button class="s-btn" onclick="showSummary('debt-instruments',this)">📜 LT Debt</button>
+    <button class="s-btn" onclick="showSummary('fccb',this)">🌐 FCCB/DIB</button>
+    <button class="s-btn" onclick="showSummary('tbills',this)">🏛️ T-Bills</button>
+    <button class="s-btn" onclick="showSummary('cd-cp',this)">🏦 CD/CP</button>
+    <button class="s-btn" onclick="showSummary('callmkt',this)">📞 Call Mkt</button>
+    <button class="s-btn" onclick="showSummary('repo',this)">🔄 Repo</button>
+    <button class="s-btn" onclick="showSummary('sdf-triparty',this)">🏗️ SDF/LTRO</button>
+    <button class="s-btn" onclick="showSummary('rbi-debt',this)">🔁 RBI Debt</button>
+    <button class="s-btn" onclick="showSummary('debt-reg',this)">📋 Debt Reg</button>
+    <button class="s-btn" onclick="showSummary('libor',this)">🌍 LIBOR</button>
   </div>
 
   <!-- WHY EQUITY -->
@@ -808,6 +835,398 @@ p.body-text{font-size:13px;line-height:1.7;color:var(--muted);margin:6px 0;}
       </div>
     </div>
   </div>
+
+  <!-- DEBT INTRO -->
+  <div class="summary-content" id="sc-debt-intro">
+    <div class="card">
+      <div class="tag blue">Chapter 2 — Debt Market</div>
+      <h2>💳 Introduction to Debt</h2>
+      <div class="info-box amber"><strong>Simple Story:</strong> Mohan borrows ₹10,000 from Sohan. Mohan = Borrower. Sohan = Lender. Mohan must repay ₹10,000 (principal) + interest. This is DEBT. The company does NOT give up any ownership when it borrows — unlike equity.</div>
+      <h3 class="sub">3 Steps of Debt Process</h3>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="num">1</div><div class="content"><h4>Issue of Debt</h4><p>Reliance issues debt instruments to the public. Gets funds WITHOUT giving up ownership. Debt is quantified in monetary terms (unlike equity in number of shares).</p></div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="num">2</div><div class="content"><h4>Payment of Interest</h4><p>Reliance pays interest on the borrowed amount. Interest = cost of using the funds. Fixed rate — unlike variable dividends in equity.</p></div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="num">3</div><div class="content"><h4>Repayment of Principal</h4><p>At maturity, Reliance returns the principal to the investor. Debt has a defined maturity/expiry period — equity has no maturity.</p></div></div>
+      </div>
+      <h3 class="sub">8 Features of Debt</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>1. Debt Capital</strong><br><span style="color:var(--muted)">Funds raised by borrowing (loans, bonds). Not by issuing shares.</span></div>
+        <div class="mini-card"><strong>2. Relationship</strong><br><span style="color:var(--muted)">Borrower (company) and Lender. Lender is also called Investor and Creditor — holds financial claim.</span></div>
+        <div class="mini-card"><strong>3. Tradability</strong><br><span style="color:var(--muted)">Certain debt instruments CAN be bought/sold on stock exchanges (BSE, NSE).</span></div>
+        <div class="mini-card"><strong>4. Fixed Rate of Return</strong><br><span style="color:var(--muted)">Debt instruments usually provide FIXED interest payments. Also called fixed-rate instruments.</span></div>
+        <div class="mini-card"><strong>5. No Management Participation</strong><br><span style="color:var(--muted)">Lenders have NO say in management or control of the borrowing company.</span></div>
+        <div class="mini-card"><strong>6. Priority in Repayment</strong><br><span style="color:var(--muted)">In bankruptcy/liquidation, debt holders are repaid BEFORE equity shareholders.</span></div>
+        <div class="mini-card"><strong>7. Types</strong><br><span style="color:var(--muted)">Bonds, debentures, commercial paper, T-bills, CDs, etc.</span></div>
+        <div class="mini-card"><strong>8. Less Risk</strong><br><span style="color:var(--muted)">Less risky for investors. Regular fixed interest, set timeline for principal repayment.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEBT CHOICE -->
+  <div class="summary-content" id="sc-debt-choice">
+    <div class="card">
+      <div class="tag green">Chapter 2 — Debt vs Equity</div>
+      <h2>⚖️ Equity vs Debt — Differences &amp; Choice</h2>
+      <table class="compare-table">
+        <tr><th>Basis</th><th>Equity</th><th>Debt</th></tr>
+        <tr><td>Meaning</td><td>Money arranged by issuing ownership to public</td><td>Money arranged by borrowing from public</td></tr>
+        <tr><td>Return to investor</td><td>Dividends</td><td>Interest</td></tr>
+        <tr><td>Return frequency</td><td>Variable (only from profits)</td><td>Generally Fixed</td></tr>
+        <tr><td>Duration</td><td>Generally longer</td><td>Generally shorter</td></tr>
+        <tr><td>Voting &amp; Management</td><td>Available (owners)</td><td>Not available (lenders)</td></tr>
+        <tr><td>Maturity</td><td>Not available</td><td>Available (defined)</td></tr>
+        <tr><td>Effect on profits</td><td>Appropriation of profits (dividends from surplus)</td><td>Charge against profits (interest is mandatory)</td></tr>
+        <tr><td>Instruments</td><td>Shares, Bonus Issue, ESOP</td><td>Bonds, Debentures, CPs, etc.</td></tr>
+        <tr><td>Risk</td><td>Higher</td><td>Lower</td></tr>
+      </table>
+      <h3 class="sub">4 Factors for Choosing Debt vs Equity</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>1. Ability to Pay Interest</strong><br><span style="color:var(--muted)">Stable profits = Debt suitable (can meet regular interest obligations).</span></div>
+        <div class="mini-card"><strong>2. Willingness to Dilute Ownership</strong><br><span style="color:var(--muted)">Don't want to reduce ownership stake? Choose Debt.</span></div>
+        <div class="mini-card"><strong>3. Time Period Required</strong><br><span style="color:var(--muted)">Short-term capital needs = Debt. Working capital commonly funded by debt/bank borrowings.</span></div>
+        <div class="mini-card"><strong>4. Risk Tolerance</strong><br><span style="color:var(--muted)">Low risk tolerance = Debt may burden them. High risk tolerance = Equity shares risk with investors.</span></div>
+      </div>
+      <h3 class="sub">Advantages &amp; Disadvantages</h3>
+      <table class="compare-table">
+        <tr><th></th><th>Equity (for companies)</th><th>Debt (for companies)</th></tr>
+        <tr><td>Advantage</td><td>No obligation to repay. Capital available as long as needed.</td><td>No ownership dilution. No investor interference in management. Tax savings (interest is deductible).</td></tr>
+        <tr><td>Disadvantage</td><td>Dilutes ownership. Equity investors participate in management.</td><td>Fixed interest obligation regardless of profits.</td></tr>
+      </table>
+      <table class="compare-table" style="margin-top:12px">
+        <tr><th></th><th>Equity (for investors)</th><th>Debt (for investors)</th></tr>
+        <tr><td>Advantage</td><td>Higher potential returns. Historically higher long-term average returns.</td><td>Guaranteed/fixed returns. Lower risk. Predictable income.</td></tr>
+        <tr><td>Disadvantage</td><td>No guaranteed return. Can lose all money.</td><td>Lower returns than equity over long term.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- LONG TERM DEBT -->
+  <div class="summary-content" id="sc-debt-instruments">
+    <div class="card">
+      <div class="tag amber">Chapter 2 — Long-term Debt</div>
+      <h2>📜 Long-term Debt Instruments</h2>
+      <p class="body-text">Long-term debt instruments have maturities exceeding one year. Includes bonds, debentures, and other long-maturity securities.</p>
+      <h3 class="sub">Government G-Secs</h3>
+      <div class="info-box">
+        <strong>G-Sec = Government Security</strong> — Financial instruments issued by government to raise money.<br><br>
+        <strong>Central Government:</strong> Can issue short-term (T-Bills, CMBs) AND long-term (Bonds/Dated Securities).<br>
+        <strong>State Government:</strong> Can issue ONLY long-term securities = <strong>State Development Loans (SDL)</strong>.
+      </div>
+      <h3 class="sub">Bonds vs Debentures</h3>
+      <div class="info-box amber">In informal language bonds and debentures mean the same. In finance, there is a clear difference:</div>
+      <table class="compare-table">
+        <tr><th>Basis</th><th>Bonds</th><th>Debentures</th></tr>
+        <tr><td>Issued by</td><td>Central Government</td><td>Corporates / Private companies</td></tr>
+        <tr><td>Risk</td><td>Low — government-backed, very low default chance</td><td>High — private company can default</td></tr>
+        <tr><td>Return</td><td>Low (compared to debentures)</td><td>High (compared to bonds)</td></tr>
+      </table>
+      <h3 class="sub">Capital Formation</h3>
+      <div class="info-box green">Movement of money from investors/general public to companies for expanding operations = <strong>Capital Formation</strong>. It is the core purpose of the capital market.</div>
+    </div>
+  </div>
+
+  <!-- FCCB, FCEB, NEW BONDS -->
+  <div class="summary-content" id="sc-fccb">
+    <div class="card">
+      <div class="tag pink">Chapter 2 — Special Bonds</div>
+      <h2>🌐 FCCB, FCEB &amp; Emerging Bond Types</h2>
+      <h3 class="sub">FCCB — Foreign Currency Convertible Bonds</h3>
+      <div class="info-box">
+        • Foreign currency (usually USD) denominated debt raised by Indian companies in INTERNATIONAL markets.<br>
+        • Option to convert into equity shares of the <strong>SAME company</strong> — at MATURITY.<br>
+        • Interest and principal repaid in FOREIGN CURRENCY.<br>
+        • Hybrid instrument — starts as debt, can become equity.<br>
+        • Regulated by RBI under FEMA (Foreign Exchange Management Act).
+      </div>
+      <h3 class="sub">FCEB — Foreign Currency Exchangeable Bonds</h3>
+      <div class="info-box amber">
+        • Very similar to FCCB but KEY DIFFERENCE: debt converts to equity of a <strong>DIFFERENT company</strong>.<br>
+        • E.g., XYZ issues bonds in USA → at maturity, bondholders get shares of PQR (a different company).<br>
+        • Both interest and principal in foreign currency.
+      </div>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>FCCB</th><th>FCEB</th></tr>
+        <tr><td>Converts to equity of</td><td>SAME issuing company</td><td>DIFFERENT company</td></tr>
+        <tr><td>Conversion timing</td><td>At maturity</td><td>Before maturity</td></tr>
+        <tr><td>Currency</td><td>Foreign (usually USD)</td><td>Foreign (usually USD)</td></tr>
+        <tr><td>Regulated by</td><td>RBI under FEMA</td><td>RBI under FEMA</td></tr>
+      </table>
+      <h3 class="sub">ZCZP Bond — Zero Coupon Zero Principal</h3>
+      <div class="info-box green">
+        • No coupon (no interest) + no principal repayment. Pure structured philanthropy.<br>
+        • Issued by NGOs/social organizations for social causes — education, health, rural upliftment.<br>
+        • Min application: <strong>₹1,000</strong> | Min issue size: <strong>₹50 lakh</strong> | Min subscription: <strong>75%</strong>
+      </div>
+      <h3 class="sub">Development Impact Bond (DIB) vs Social Impact Bond (SIB)</h3>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>DIB</th><th>SIB</th></tr>
+        <tr><td>Outcome Funder</td><td>Donor or Foundation</td><td>Government</td></tr>
+        <tr><td>How it works</td><td>Private investors fund NGO upfront. Donor repays if outcomes met.</td><td>Same structure but Government repays on success.</td></tr>
+        <tr><td>Risk bearer</td><td>Investors (if targets missed)</td><td>Investors (if targets missed)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- T-BILLS & CMBs -->
+  <div class="summary-content" id="sc-tbills">
+    <div class="card">
+      <div class="tag blue">Chapter 2 — Short-term Govt Instruments</div>
+      <h2>🏛️ Treasury Bills (T-Bills) &amp; Cash Management Bills (CMBs)</h2>
+      <div class="info-box amber">Issued by <strong>Central/Union Government ONLY</strong> via RBI. State governments CANNOT issue T-Bills.</div>
+      <h3 class="sub">T-Bill Key Features</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>3 Maturity Periods</strong><br><span style="color:var(--muted)">91 days, 182 days, 364 days. Always less than 365 days.</span></div>
+        <div class="mini-card"><strong>Issued at Discount</strong><br><span style="color:var(--muted)">Issue price &lt; Face value. No periodic interest = Zero Coupon Bill. Return = Face Value minus Issue Price.</span></div>
+        <div class="mini-card"><strong>Min Denomination</strong><br><span style="color:var(--muted)">₹10,000 and multiples thereof.</span></div>
+        <div class="mini-card"><strong>Low Risk / Safe</strong><br><span style="color:var(--muted)">Issued by RBI on behalf of govt. Backed by full faith of government. Virtually risk-free.</span></div>
+        <div class="mini-card"><strong>SLR Eligible</strong><br><span style="color:var(--muted)">T-Bills count for Statutory Liquidity Ratio (SLR) purposes.</span></div>
+        <div class="mini-card"><strong>Settlement</strong><br><span style="color:var(--muted)">Auctions every Wednesday. Settlement on T+1 basis.</span></div>
+        <div class="mini-card"><strong>Yield Formula</strong><br><span style="color:var(--muted)">(Face Value − Issue Price) / Issue Price × 100. Expressed as %.</span></div>
+        <div class="mini-card"><strong>Tradable</strong><br><span style="color:var(--muted)">Actively traded on Indian financial markets. High liquidity.</span></div>
+      </div>
+      <h3 class="sub">3 Types of T-Bills (Historical)</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>A. On-Tap Bills</strong><br><span style="color:var(--muted)">Issued for immediate cash needs without prolonged process. <strong>Discontinued April 1, 1997.</strong></span></div>
+        <div class="mini-card"><strong>B. Ad Hoc T-Bills</strong><br><span style="color:var(--muted)">Initiated 1955. Maintained govt cash balance with RBI. <strong>Abolished 1997.</strong></span></div>
+        <div class="mini-card"><strong>C. Auctioned T-Bills</strong><br><span style="color:var(--muted)">Current method. RBI collects bids from investors. Sub-types: Yield-Based Auction and Price-Based Auction.</span></div>
+      </div>
+      <div class="info-box green">
+        <strong>Competitive vs Non-Competitive Bidding:</strong><br>
+        Retail/general investors can participate on non-competitive basis. Capped at 5% of total issue. Min bid: ₹10,000. In GoI dated securities, single retail bid ≤ ₹2 crore.
+      </div>
+      <h3 class="sub">Cash Management Bills (CMBs)</h3>
+      <div class="info-box">
+        • Same generic character as T-Bills — issued at discount, redeemed at face value.<br>
+        • Used when govt needs funds for <strong>LESS THAN 91 days</strong>.<br>
+        • If need is 91 days or more → use T-Bills instead.<br>
+        • Settlement: T+1 basis.
+      </div>
+    </div>
+  </div>
+
+  <!-- CD & COMMERCIAL PAPER -->
+  <div class="summary-content" id="sc-cd-cp">
+    <div class="card">
+      <div class="tag green">Chapter 2 — Corporate Short-term Debt</div>
+      <h2>🏦 CD, Commercial Paper, Commercial Bill &amp; ICD</h2>
+      <h3 class="sub">Certificate of Deposit (CD)</h3>
+      <p class="body-text">A time deposit offered by banks/FIs. Bank acknowledges deposit and returns principal + interest at maturity.</p>
+      <div class="info-box">Who can issue CDs: <strong>Scheduled Commercial Banks, Regional Rural Banks, Small Finance Banks, AIFIs (like NABARD).</strong></div>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>Min Amount</strong><br><span style="color:var(--muted)">₹5 lakh and multiples thereof.</span></div>
+        <div class="mini-card"><strong>Banks Maturity</strong><br><span style="color:var(--muted)">Min 7 days, Max 1 year.</span></div>
+        <div class="mini-card"><strong>FIs/AIFIs Maturity</strong><br><span style="color:var(--muted)">Min 1 year, Max 3 years.</span></div>
+        <div class="mini-card"><strong>Loans against CD</strong><br><span style="color:var(--muted)">Loans CANNOT be granted against CDs. Banks CAN buy back CDs before maturity.</span></div>
+        <div class="mini-card"><strong>Format</strong><br><span style="color:var(--muted)">Issued in DEMAT form. Investors can request physical form (promissory note).</span></div>
+        <div class="mini-card"><strong>Settlement</strong><br><span style="color:var(--muted)">Issued on T+1 basis. Details reported to F-TRAC (Clearcorp) by 5:30 PM on day of issuance.</span></div>
+      </div>
+      <div class="info-box amber"><strong>Negotiable vs Non-Negotiable CDs:</strong> Non-negotiable = cannot be sold before maturity. Negotiable = can be sold in secondary market before maturity. FIMMDA prescribes standard procedures in consultation with RBI.</div>
+      <h3 class="sub">Commercial Paper (CP)</h3>
+      <p class="body-text">Short-term unsecured money market instrument by corporate borrowers. Introduced in India in <strong>1990</strong>. Also called <strong>unsecured promissory note</strong> — no collateral, only excellent credit-rated firms can issue it.</p>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>Eligibility</strong><br><span style="color:var(--muted)">Companies, Primary Dealers, AIFIs. Min net worth ₹100 crore. Co-operative societies and LLPs with net worth ₹100 crore may also issue CPs.</span></div>
+        <div class="mini-card"><strong>Maturity</strong><br><span style="color:var(--muted)">Min 7 days, Max 1 year from date of issue.</span></div>
+        <div class="mini-card"><strong>Min Credit Rating</strong><br><span style="color:var(--muted)">A3 as per SEBI symbols. From SEBI-registered CRA.</span></div>
+        <div class="mini-card"><strong>Denomination</strong><br><span style="color:var(--muted)">₹5 lakh or multiples thereof. Min investor investment = ₹5 lakh.</span></div>
+        <div class="mini-card"><strong>Always at Discount</strong><br><span style="color:var(--muted)">Always issued at discount to face value.</span></div>
+        <div class="mini-card"><strong>3 Parties</strong><br><span style="color:var(--muted)">Issuer (company) + IPA (Issuing and Paying Agent) + Credit Rating Agency.</span></div>
+      </div>
+      <h3 class="sub">Commercial Bill &amp; ICD</h3>
+      <div class="info-box green">
+        <strong>Commercial Bill:</strong> Company A sells goods to Company B on credit. Company A (Drawer) issues Trade Bill to Company B (Drawee). Company A needs cash now → sells trade bill to bank at discount = bank now owns it = <strong>Commercial Bill</strong>. This = <strong>Discounting of Bills</strong>.<br>
+        Demand Bill = payable on demand. Usance Bill = payable after specified future date.
+      </div>
+      <div class="info-box">
+        <strong>ICD (Intercorporate Deposit):</strong> Unsecured borrowing by corporates from OTHER corporate entities. No bank involved. Governed under Companies Act. Higher interest than CDs (uncollateralised). Most common tenure: <strong>90 days</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- CALL MARKET & CBLO -->
+  <div class="summary-content" id="sc-callmkt">
+    <div class="card">
+      <div class="tag purple">Chapter 2 — Interbank Borrowing</div>
+      <h2>📞 Call Money Market &amp; CBLO</h2>
+      <div class="info-box amber">When banks borrow from one another = <strong>Call Money</strong>. Used to meet reserve requirements (SLR, CRR). <strong>Non-banking entities CANNOT use Call Market.</strong> No collateral required. Highly liquid but also highly volatile.</div>
+      <h3 class="sub">3 Types of Call Markets</h3>
+      <table class="compare-table">
+        <tr><th>Type</th><th>Duration</th></tr>
+        <tr><td>Call Money Market</td><td>1 day (overnight). Weekends/holidays excluded.</td></tr>
+        <tr><td>Notice Money Market</td><td>2 to 14 days</td></tr>
+        <tr><td>Term Money Market</td><td>More than 14 days (usually 3 months to 1 year)</td></tr>
+      </table>
+      <div class="info-box green">
+        <strong>Who can participate:</strong> All Scheduled Commercial Banks, RRBs, Cooperative Banks (excl. Land Development Banks), Primary Dealers, Payment Banks, Small Finance Banks.<br>
+        Non-banking institutions (other than Primary Dealers) = NOT permitted.<br>
+        <strong>CCIL Platform:</strong> NDS-Call (Negotiated Dealing System – Call Market). Call Rate = interest rate in call market.
+      </div>
+      <h3 class="sub">CBLO — Collateralized Borrowing and Lending Obligation</h3>
+      <div class="info-box pink">
+        For non-bank entities who CANNOT use Call Market. Operated by CCIL. Borrowers provide eligible securities (T-Bills, govt securities) as collateral to CCIL.<br>
+        Maturity: 1 day to 1 year. Discounted instrument.<br>
+        <strong>Key difference from Call Market: CBLO requires COLLATERAL. Call Market does NOT.</strong><br>
+        <strong>CBLO discontinued November 2018 — replaced by Triparty Repo.</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPO & REVERSE REPO -->
+  <div class="summary-content" id="sc-repo">
+    <div class="card">
+      <div class="tag blue">Chapter 2 — Liquidity Management</div>
+      <h2>🔄 Repo &amp; Reverse Repo Transactions</h2>
+      <div class="info-box amber">Main objective = Manage liquidity (money supply) in the economy. Optimal = Moderate liquidity. Too much = inflation. Too little = economic slowdown.</div>
+      <h3 class="sub">REPO — Repurchase Option</h3>
+      <div class="info-box">
+        Banks (e.g., SBI) sell securities (collateral) to RBI → receive cash → pay interest at <strong>Repo Rate</strong> → at maturity repurchase securities + repay principal.<br>
+        <strong>Purpose: INJECT liquidity.</strong> Lower repo rate = banks borrow more = more money in economy.
+      </div>
+      <h3 class="sub">Two Legs of Repo</h3>
+      <table class="compare-table">
+        <tr><th>Leg</th><th>Bank (Borrower)</th><th>RBI (Lender)</th></tr>
+        <tr><td>First Leg</td><td>Sells securities, receives cash</td><td>Buys securities, pays cash</td></tr>
+        <tr><td>Second Leg</td><td>Repurchases securities, pays principal + interest</td><td>Returns securities, receives repayment</td></tr>
+      </table>
+      <div class="info-box green">Also called <strong>Ready Forward Transaction</strong> — sells on spot (ready) basis, repurchases on forward basis. Repo period: Min 1 day, Max 1 year.</div>
+      <h3 class="sub">Eligible Collateral for Repo</h3>
+      <div class="pill-row">
+        <div class="pill a">Central/State Govt Securities</div>
+        <div class="pill g">T-Bills &amp; CMBs</div>
+        <div class="pill am">Listed Corporate Bonds &amp; Debentures</div>
+        <div class="pill pk">Commercial Papers (CPs)</div>
+        <div class="pill pu">Certificate of Deposits (CDs)</div>
+        <div class="pill a">Units of Debt ETFs</div>
+      </div>
+      <h3 class="sub">Haircut &amp; Types of Repo</h3>
+      <div class="info-box pink"><strong>Haircut:</strong> Amount held back by RBI. E.g., SBI gives collateral worth ₹1,000 → RBI gives only ₹900 loan → keeps ₹100 as haircut. Safety net if borrower defaults.</div>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>Overnight Repo</strong><br><span style="color:var(--muted)">1-day maturity.</span></div>
+        <div class="mini-card"><strong>Term Repo</strong><br><span style="color:var(--muted)">Specified maturity of more than 1 day.</span></div>
+        <div class="mini-card"><strong>Open Repo</strong><br><span style="color:var(--muted)">No specified maturity date.</span></div>
+      </div>
+      <h3 class="sub">REVERSE REPO</h3>
+      <div class="info-box amber">
+        COMPLETE OPPOSITE of Repo. RBI borrows from banks. Banks lend surplus funds to RBI → RBI provides G-Secs as collateral → pays interest at <strong>Reverse Repo Rate</strong>.<br>
+        <strong>Purpose: WITHDRAW excess liquidity.</strong> Reduces money supply to control inflation.
+      </div>
+      <div class="info-box"><strong>Memory Trick:</strong> REPO = RBI lends to banks = Injects liquidity. REVERSE REPO = RBI borrows from banks = Withdraws liquidity.</div>
+    </div>
+  </div>
+
+  <!-- SDF, TRIPARTY, LTRO -->
+  <div class="summary-content" id="sc-sdf-triparty">
+    <div class="card">
+      <div class="tag green">Chapter 2 — Advanced Liquidity Tools</div>
+      <h2>🏗️ SDF, MSS, Triparty Repo, LTRO &amp; TLTRO</h2>
+      <h3 class="sub">SDF — Standing Deposit Facility</h3>
+      <div class="info-box">
+        Purpose: Withdraw excess liquidity (same as Reverse Repo) but <strong>NO collateral required</strong>.<br>
+        In Reverse Repo: RBI provides G-Secs as collateral. In SDF: Banks just deposit funds with RBI directly.<br>
+        Introduced by RBI on <strong>April 8, 2022</strong>. Banks earn interest on deposits under SDF.
+      </div>
+      <h3 class="sub">MSS — Market Stabilization Scheme</h3>
+      <div class="info-box amber">
+        Withdraws excess liquidity by selling government securities. Introduced: <strong>April 2004</strong>.<br>
+        Securities = <strong>Market Stabilisation Bonds (MSBs)</strong>. Owned by government, issued by RBI.<br>
+        Money obtained kept in FIXED account — govt CANNOT use it (else liquidity re-enters economy).<br>
+        Govt allocates budget to RBI annually to pay interest on MSBs.
+      </div>
+      <h3 class="sub">Triparty Repo (Replaced CBLO Nov 2018)</h3>
+      <div class="info-box green">
+        <strong>3 parties:</strong> Borrower (needs funds, pledges securities) + Lender (provides cash) + Mediator/Triparty Agent (neutral — manages collateral, settlement).<br>
+        <strong>Why CBLO replaced:</strong> CBLO allowed private bonds as collateral. Triparty Repo = only G-Secs = higher quality collateral.
+      </div>
+      <h3 class="sub">LTRO vs TLTRO</h3>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>LTRO</th><th>TLTRO</th></tr>
+        <tr><td>Full Name</td><td>Long-Term Repo Operations</td><td>Targeted Long-Term Repo Operations</td></tr>
+        <tr><td>Duration</td><td>1 to 3 years</td><td>Same long-term duration</td></tr>
+        <tr><td>Purpose</td><td>Provide long-term liquidity to banks</td><td>Direct liquidity to SPECIFIC sectors (SMBs, NBFCs)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- RBI DEBT MARKET -->
+  <div class="summary-content" id="sc-rbi-debt">
+    <div class="card">
+      <div class="tag blue">Chapter 2 — RBI &amp; Debt Market</div>
+      <h2>🔁 RBI Retail Direct, NDS-OM, E-Kuber &amp; CCIL</h2>
+      <h3 class="sub">RBI Regulation of Debt Market</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>Money Market</strong><br><span style="color:var(--muted)">RBI regulates entire money market. Settlement on stock exchanges = SEBI.</span></div>
+        <div class="mini-card"><strong>Long-term Govt Debt</strong><br><span style="color:var(--muted)">RBI regulates G-Secs market.</span></div>
+        <div class="mini-card"><strong>Long-term Corporate Debt</strong><br><span style="color:var(--muted)">Long-term corporate debt (debentures etc.) = regulated by SEBI, not RBI.</span></div>
+      </div>
+      <h3 class="sub">RBI Retail Direct Scheme</h3>
+      <div class="info-box green">
+        One-stop platform for individual investors to invest in G-Secs. Open <strong>Retail Direct Gilt (RDG) Account</strong> with RBI.<br>
+        Works in both PRIMARY market (buy new G-Secs directly) and SECONDARY market (trade with other investors).<br>
+        <strong>Only Government Securities</strong> — no private securities (debentures etc.).
+      </div>
+      <h3 class="sub">NDS-OM, E-Kuber &amp; CCIL</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>NDS-OM</strong><br><span style="color:var(--muted)">Negotiated Dealing System – Order Matching. Secondary market for G-Secs. Matches buy/sell orders. Launched August 2005. Owned by RBI, administered by CCIL.</span></div>
+        <div class="mini-card"><strong>E-Kuber</strong><br><span style="color:var(--muted)">Primary market platform — investors submit bids for new G-Sec issues. Also Core Banking Solution (CBS) of RBI — connects with banks 24x7. Owned and maintained by RBI.</span></div>
+        <div class="mini-card"><strong>CCIL</strong><br><span style="color:var(--muted)">Clearing Corporation of India Limited. Set up April 2001. Central Counterparty (CCP). Process = Novation. Manages: NDS-Call + NDS-OM + Triparty Repo.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEBT REGULATIONS -->
+  <div class="summary-content" id="sc-debt-reg">
+    <div class="card">
+      <div class="tag amber">Chapter 2 — Debt Regulations</div>
+      <h2>📋 Regulations for Debt Issue &amp; Primary Dealers</h2>
+      <div class="info-box">
+        <strong>Public Issue:</strong> Securities issued to a larger number of people. SEBI regulates private securities (debentures). G-Secs regulated by RBI.<br>
+        <strong>Private Placement:</strong> Max 200 selected people.
+      </div>
+      <h3 class="sub">Key Rules for Public Issue of Debt Securities</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>Eligibility</strong><br><span style="color:var(--muted)">Public limited company under Companies Act 2013. Unlisted companies can also issue debentures and list them.</span></div>
+        <div class="mini-card"><strong>Base Issue Size</strong><br><span style="color:var(--muted)">Minimum ₹100 crore. Can retain oversubscription up to 100% of base issue size.</span></div>
+        <div class="mini-card"><strong>Offer Document</strong><br><span style="color:var(--muted)">Filed with stock exchange. Public comments for 7 days. Final document filed with RoC and SEBI.</span></div>
+        <div class="mini-card"><strong>Listing</strong><br><span style="color:var(--muted)">Debentures MUST be listed on a stock exchange. In-principle approval needed before filing offer document.</span></div>
+        <div class="mini-card"><strong>Credit Rating</strong><br><span style="color:var(--muted)">Min one CRA required. If multiple ratings obtained, ALL must be disclosed.</span></div>
+        <div class="mini-card"><strong>Min Subscription</strong><br><span style="color:var(--muted)">75% of base issue size. If not received → refund within 12 days from closure.</span></div>
+        <div class="mini-card"><strong>Debenture Trustees</strong><br><span style="color:var(--muted)">Must be appointed (banks/FIs registered with SEBI). Oversee investor interests.</span></div>
+      </div>
+      <h3 class="sub">Primary Dealers &amp; Holding of G-Secs</h3>
+      <div class="info-box green">
+        <strong>Primary Dealers:</strong> RBI-registered entities licensed to buy/sell G-Secs. Buy from RBI (primary) → resell to investors (secondary) = CREATE market for G-Secs.
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>SGL Account</strong><br><span style="color:var(--muted)">Subsidiary General Ledger. Maintained with RBI by banks, PDs, FIs. All G-Sec transactions go through SGL.</span></div>
+        <div class="mini-card"><strong>CSGL Account</strong><br><span style="color:var(--muted)">Constituent SGL (SGL II). For entities not eligible for SGL. Open Gilt Account with bank/PD who maintains CSGL with RBI.</span></div>
+        <div class="mini-card"><strong>Demat Account</strong><br><span style="color:var(--muted)">With NSDL/CDSL. Facilitates trading of G-Secs on stock exchanges.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIBOR & MISC -->
+  <div class="summary-content" id="sc-libor">
+    <div class="card">
+      <div class="tag pink">Chapter 2 — Reference Rates &amp; Misc</div>
+      <h2>🌍 LIBOR, SOFR, STRIPS, NCD &amp; Warrants</h2>
+      <div class="info-box">
+        <strong>LIBOR</strong> = London Interbank Offered Rate. Global benchmark for interbank short-term lending rates. Used for international inter-bank borrowings (less than 1 year). MIFOR (Mumbai Interbank Forward Outright Rate) was calculated based on LIBOR.
+      </div>
+      <div class="info-box red">
+        <strong>2013 LIBOR Scandal:</strong> Financial irregularities found. MIFOR impacted too. RBI ruled: Indian banks going for international borrowings CANNOT use LIBOR, MIFOR, or any LIBOR-dependent rate.
+      </div>
+      <div class="info-box green">
+        <strong>Replacement:</strong> RBI focused on <strong>SOFR (Secured Overnight Financing Rate)</strong>. India now uses <strong>Modified MIFOR (MMIFOR)</strong> — based on SOFR — for international borrowing calculations.
+      </div>
+      <h3 class="sub">Miscellaneous Concepts</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>Warrants</strong><br><span style="color:var(--muted)">Securities giving holder the RIGHT (not obligation) to buy securities at a set price before a set time. Usually attached to newly issued bonds or preferred stock. E.g., bond + right to buy 100 shares at $20 for 5 years.</span></div>
+        <div class="mini-card"><strong>STRIPS</strong><br><span style="color:var(--muted)">Separate Trading of Registered Interest and Principal of Securities. Strips a coupon-bearing security into multiple zero-coupon securities tradable separately. E.g., 10-yr G-Sec → 1 principal + 11 coupon payment components.</span></div>
+        <div class="mini-card"><strong>NCDs</strong><br><span style="color:var(--muted)">Non-Convertible Debentures. CANNOT convert to equity. Fixed/floating coupon. Min denomination ₹5 lakh. Tenor: 90 days to 1 year. Individual subscription capped at 25%. Eligible: companies, NBFCs, InvITs, REITs, AIFIs (net worth ≥ ₹100 crore).</span></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════════ FLASHCARDS ═══════════════ -->
@@ -825,6 +1244,7 @@ p.body-text{font-size:13px;line-height:1.7;color:var(--muted);margin:6px 0;}
     <button class="s-btn" onclick="filterCards('numbers',this)">Key Numbers</button>
     <button class="s-btn" onclick="filterCards('laws',this)">Laws & Acts</button>
     <button class="s-btn" onclick="filterCards('misc',this)">Misc</button>
+    <button class="s-btn" onclick="filterCards('debt',this)">💳 Debt Market</button>
   </div>
   <div class="fc-progress">
     <span id="fc-counter">1/1</span>
@@ -1046,6 +1466,49 @@ p.body-text{font-size:13px;line-height:1.7;color:var(--muted);margin:6px 0;}
       </ul>
     </div>
   </div>
+
+  <h3 style="font-family:'Syne',sans-serif;color:var(--accent5);margin:24px 0 10px;">💳 Debt Market — Key Numbers</h3>
+  <div class="nums-grid">
+    <div class="num-card"><div class="big-num">91d</div><div class="label">T-Bill shortest maturity</div></div>
+    <div class="num-card"><div class="big-num">182d</div><div class="label">T-Bill medium maturity</div></div>
+    <div class="num-card"><div class="big-num">364d</div><div class="label">T-Bill longest maturity</div></div>
+    <div class="num-card"><div class="big-num">₹10k</div><div class="label">T-Bill minimum denomination</div></div>
+    <div class="num-card"><div class="big-num">&lt;91d</div><div class="label">CMB maturity (less than T-Bill)</div></div>
+    <div class="num-card"><div class="big-num">₹5L</div><div class="label">Min CD &amp; CP denomination</div></div>
+    <div class="num-card"><div class="big-num">7d</div><div class="label">Min CD maturity (banks)</div></div>
+    <div class="num-card"><div class="big-num">1yr</div><div class="label">Max CD maturity (banks)</div></div>
+    <div class="num-card"><div class="big-num">3yr</div><div class="label">Max CD maturity (AIFIs)</div></div>
+    <div class="num-card"><div class="big-num">1990</div><div class="label">CP introduced in India</div></div>
+    <div class="num-card"><div class="big-num">A3</div><div class="label">Min credit rating for CP</div></div>
+    <div class="num-card"><div class="big-num">14d</div><div class="label">Notice Money max (Call Market)</div></div>
+    <div class="num-card"><div class="big-num">2001</div><div class="label">CCIL set up (April)</div></div>
+    <div class="num-card"><div class="big-num">2005</div><div class="label">NDS-OM launched (Aug)</div></div>
+    <div class="num-card"><div class="big-num">2022</div><div class="label">SDF introduced (Apr 8)</div></div>
+    <div class="num-card"><div class="big-num">2004</div><div class="label">MSS introduced (April)</div></div>
+    <div class="num-card"><div class="big-num">2018</div><div class="label">CBLO discontinued (Nov)</div></div>
+    <div class="num-card"><div class="big-num">1-3yr</div><div class="label">LTRO duration</div></div>
+    <div class="num-card"><div class="big-num">₹100Cr</div><div class="label">Min base size — public debt issue</div></div>
+    <div class="num-card"><div class="big-num">75%</div><div class="label">Min subscription — public debt issue</div></div>
+    <div class="num-card"><div class="big-num">12d</div><div class="label">Refund if min subscription not met</div></div>
+    <div class="num-card"><div class="big-num">75%</div><div class="label">Min subscription — ZCZP Bond</div></div>
+    <div class="num-card"><div class="big-num">₹50L</div><div class="label">Min issue size — ZCZP Bond</div></div>
+    <div class="num-card"><div class="big-num">₹1k</div><div class="label">Min application — ZCZP Bond</div></div>
+    <div class="num-card"><div class="big-num">90d</div><div class="label">Most common ICD borrowing period</div></div>
+    <div class="num-card"><div class="big-num">5%</div><div class="label">Non-competitive bid cap in T-Bill auctions</div></div>
+    <div class="num-card"><div class="big-num">₹2Cr</div><div class="label">Max single retail bid in G-Sec auctions</div></div>
+    <div class="num-card"><div class="big-num">₹100Cr</div><div class="label">Min net worth to issue CP</div></div>
+  </div>
+
+  <h3 style="font-family:'Syne',sans-serif;color:var(--accent5);margin:24px 0 10px;">💳 Debt Market — Quick Reference Cards</h3>
+  <div class="cheat-grid">
+    <div class="cheat-card"><h3>📜 Debt vs Equity</h3><ul><li><strong>Equity:</strong> Ownership, Dividends, Variable return, No maturity</li><li><strong>Debt:</strong> Borrowing, Interest, Fixed return, Defined maturity</li><li>Debt = Charge against profits (mandatory). Equity = Appropriation (discretionary).</li><li>In liquidation, Debt repaid FIRST before equity</li></ul></div>
+    <div class="cheat-card"><h3>🏛️ T-Bills vs CMBs</h3><ul><li><strong>T-Bills:</strong> 91, 182, 364 days. Central Govt only.</li><li><strong>CMBs:</strong> Less than 91 days. Same issuer (Central Govt).</li><li>Both issued at discount, redeemed at face value</li><li>Both = Zero coupon instruments. SLR eligible.</li><li>Settlement: T+1 basis</li></ul></div>
+    <div class="cheat-card"><h3>📑 CD vs CP</h3><ul><li><strong>CD:</strong> Issued by banks/FIs. Min Rs 5L. 7 days to 1 yr (banks), 1 to 3 yr (FIs).</li><li><strong>CP:</strong> Issued by corporates. Min Rs 5L. 7 days to 1 yr. Unsecured.</li><li>Both issued at discount. Demat form.</li><li>CP needs min A3 rating. CD needs no rating.</li></ul></div>
+    <div class="cheat-card"><h3>🔄 Repo vs Reverse Repo vs SDF</h3><ul><li><strong>Repo:</strong> Banks borrow from RBI. Injects liquidity. Uses G-Secs as collateral.</li><li><strong>Reverse Repo:</strong> RBI borrows from banks. Withdraws liquidity. Uses G-Secs as collateral.</li><li><strong>SDF:</strong> RBI absorbs funds from banks. Withdraws liquidity. NO collateral needed.</li></ul></div>
+    <div class="cheat-card"><h3>💻 RBI Platforms Summary</h3><ul><li><strong>E-Kuber:</strong> Primary market bids + CBS of RBI</li><li><strong>NDS-OM:</strong> Secondary market G-Secs (owned by RBI, managed by CCIL)</li><li><strong>NDS-Call:</strong> Call market transactions (managed by CCIL)</li><li><strong>RBI Retail Direct:</strong> Individual investors buy/sell G-Secs</li></ul></div>
+    <div class="cheat-card"><h3>🌐 FCCB vs FCEB</h3><ul><li><strong>FCCB:</strong> Converts to equity of SAME company at maturity</li><li><strong>FCEB:</strong> Converts to equity of DIFFERENT company before maturity</li><li>Both: Foreign currency denominated, Hybrid instruments</li><li>Both regulated by RBI under FEMA</li></ul></div>
+  </div>
+
 </div>
 
 <script>
@@ -1170,6 +1633,42 @@ const allCards = [
   {cat:'misc',emoji:'🌱',q:'What is the Social Stock Exchange (SSE)?',a:'SEBI-regulated segment for social organizations (NPOs, FPEs) to raise funds. Operates on BSE SSE and NSE SSE. NPOs issue ZCZP bonds (zero coupon, zero principal = pure donation). FPEs can list equity/debt. Min 67% activity in 16 social areas.'},
   {cat:'misc',emoji:'📋',q:'What is a ZCZP Bond?',a:'Zero Coupon Zero Principal bond. Used on Social Stock Exchange by NPOs. Zero coupon = no interest paid. Zero principal = no capital repaid. Essentially a structured donation. NPOs cannot raise via equity or traditional debt on SSE.'},
   {cat:'misc',emoji:'🏦',q:'What is Retained Earnings?',a:'Profits kept by a company instead of being distributed as dividends. Reserved for future business needs, expansion, etc. Affects how much dividend is paid to equity shareholders.'},
+  // ── DEBT MARKET FLASHCARDS ──
+  {cat:'debt',emoji:'💳',q:'What is Debt? How is it different from Equity?',a:'Debt = borrowing money with obligation to repay principal + interest. Equity = giving ownership. Key difference: Debt does NOT alter ownership. Debt quantified in monetary terms; equity in number of shares.'},
+  {cat:'debt',emoji:'🔢',q:'What are the 3 steps of the Debt process?',a:'1. Issue of Debt: Company issues debt instruments, gets funds without giving up ownership. 2. Payment of Interest: Company pays fixed interest. 3. Repayment of Principal: At maturity, company returns original borrowed amount.'},
+  {cat:'debt',emoji:'⚖️',q:'Equity vs Debt — Return type and frequency?',a:'Equity: Dividends (Variable, only from profits). Debt: Interest (Fixed, mandatory charge against profits regardless of profit level).'},
+  {cat:'debt',emoji:'🏛️',q:'What is Capital Formation?',a:'The movement of money from investors/general public to companies for expanding operations. Happens through the Capital Market. A symbiotic relationship — investors grow savings, companies get capital.'},
+  {cat:'debt',emoji:'📜',q:'What is the difference between Bonds and Debentures?',a:'Bonds: Issued by Central Government, Low risk (govt-backed), Low return. Debentures: Issued by Corporates/Private companies, High risk (company can default), High return. In informal language they mean the same.'},
+  {cat:'debt',emoji:'🌐',q:'What is FCCB? How does it differ from FCEB?',a:'FCCB: Foreign Currency Convertible Bond — converts to equity of SAME company at maturity. FCEB: Foreign Currency Exchangeable Bond — converts to equity of a DIFFERENT company. Both are foreign currency denominated hybrid instruments regulated by RBI under FEMA.'},
+  {cat:'debt',emoji:'📊',q:'What is a Development Impact Bond (DIB)?',a:'Private investors fund social programs upfront. Repaid ONLY if specific verified outcomes achieved. If targets missed, investors absorb loss. Outcome funder = Donor or Foundation. 5 steps: Donor sets goals, Investor funds, NGO delivers, Evaluator verifies, Donor repays on success.'},
+  {cat:'debt',emoji:'🌱',q:'DIB vs SIB — key difference?',a:'Both are results-based funding for social programs. KEY DIFFERENCE: SIB (Social Impact Bond) = Government repays investor on success. DIB (Development Impact Bond) = Donor or Foundation repays. Structure is otherwise similar.'},
+  {cat:'debt',emoji:'🏛️',q:'What are T-Bills? Who issues them?',a:'Treasury Bills — money market instruments issued by Central/Union Government ONLY (NOT state governments) via RBI. 3 maturities: 91 days, 182 days, 364 days.'},
+  {cat:'debt',emoji:'💰',q:'Why are T-Bills called Zero Coupon Bills?',a:'T-Bills are issued at a DISCOUNT to face value. No periodic interest payments. Return = Face Value minus Issue Price. No coupon payments = Zero Coupon Securities. Yield = (Face Value minus Issue Price) / Issue Price x 100.'},
+  {cat:'debt',emoji:'📅',q:'What are Cash Management Bills (CMBs)?',a:'Similar to T-Bills but for maturity LESS THAN 91 days. Used when govt needs funds for a very short period. If need is 91 days or more, use T-Bills instead. Issued at discount, redeemed at face value. Settlement T+1.'},
+  {cat:'debt',emoji:'🏦',q:'What is a Certificate of Deposit (CD)? Who can issue it?',a:'Time deposit offered by banks or FIs. Bank acknowledges deposit and returns principal plus interest at maturity. Issued by: Scheduled Commercial Banks, RRBs, Small Finance Banks, AIFIs like NABARD.'},
+  {cat:'debt',emoji:'📋',q:'CD Maturity — Banks vs Financial Institutions?',a:'Banks: Min 7 days, Max 1 year. FIs/AIFIs: Min 1 year, Max 3 years from date of issue. Min amount = Rs 5 lakh. Loans CANNOT be granted against CDs. Banks CAN buy back CDs before maturity.'},
+  {cat:'debt',emoji:'📄',q:'What is Commercial Paper (CP)?',a:'Short-term unsecured money market instrument by corporate borrowers. Also called unsecured promissory note. Introduced in India in 1990. No collateral — only excellent credit-rated firms can issue it. Always issued at discount. Min denomination Rs 5 lakh. Maturity: 7 days to 1 year.'},
+  {cat:'debt',emoji:'⭐',q:'What is the minimum credit rating required to issue CP?',a:'Minimum credit rating of A3 as per SEBI-prescribed rating symbols. Must be obtained from at least one SEBI-registered Credit Rating Agency (CRA). Ensures only creditworthy companies can access the CP market.'},
+  {cat:'debt',emoji:'📞',q:'What is Call Money? Who can use the Call Market?',a:'Call Money = banks borrowing from one another. Used to meet reserve requirements (SLR, CRR) and other expenses. No collateral required. ONLY banks and specified entities (PDs, Payment Banks etc.) can use call market. Non-banking entities CANNOT participate.'},
+  {cat:'debt',emoji:'⏱️',q:'Call Money vs Notice Money vs Term Money?',a:'Call Money: borrowed for 1 day (overnight). Notice Money: 2 to 14 days. Term Money: more than 14 days, up to 1 year (typically 3 months to 1 year).'},
+  {cat:'debt',emoji:'🔄',q:'What is CBLO and why was it discontinued?',a:'Collateralized Borrowing and Lending Obligation. Allowed non-bank entities to borrow using collateral (T-Bills, govt securities). Operated by CCIL. Discontinued November 2018. Replaced by Triparty Repo because CBLO allowed private bonds as collateral while Triparty Repo ensures only high-quality G-Secs are used.'},
+  {cat:'debt',emoji:'🔁',q:'What is a Repo transaction?',a:'Repurchase Option. Bank sells securities (collateral) to RBI, gets cash, pays interest at Repo Rate, at maturity repurchases securities and repays principal. INJECTS liquidity into economy. Lower repo rate = banks borrow more = more money in economy.'},
+  {cat:'debt',emoji:'💹',q:'What is Reverse Repo?',a:'Complete opposite of Repo. RBI borrows from banks. Banks lend surplus funds to RBI, receive G-Secs as collateral, earn interest at Reverse Repo Rate. Purpose: WITHDRAW excess liquidity from economy to control inflation.'},
+  {cat:'debt',emoji:'✂️',q:'What is a Haircut in Repo?',a:'Amount held back by RBI while providing a repo loan. E.g., SBI gives collateral worth Rs 1,000, RBI gives only Rs 900 (keeps Rs 100 as haircut). Safety net — if borrower defaults, haircut plus collateral used to recover the lent amount.'},
+  {cat:'debt',emoji:'🏗️',q:'What is SDF (Standing Deposit Facility)?',a:'RBI tool to absorb excess liquidity. Banks deposit surplus funds with RBI at a pre-determined interest rate. KEY difference from Reverse Repo: SDF requires NO collateral. Reverse Repo requires G-Secs as collateral. Introduced April 8, 2022.'},
+  {cat:'debt',emoji:'📊',q:'What is MSS (Market Stabilization Scheme)?',a:'RBI tool to withdraw excess liquidity by selling government securities (Market Stabilisation Bonds). Introduced April 2004. Money kept in fixed account — govt CANNOT spend it. Govt allocates budget to RBI to pay interest on MSBs.'},
+  {cat:'debt',emoji:'🏛️',q:'What is Triparty Repo? Who are the 3 parties?',a:'3 parties: Borrower (needs funds, pledges securities) + Lender (provides cash) + Mediator/Triparty Agent (neutral, manages collateral and settlement). Replaced CBLO Nov 2018. Only G-Secs as collateral (higher quality than CBLO which allowed private bonds).'},
+  {cat:'debt',emoji:'⏰',q:'LTRO vs TLTRO — key difference?',a:'LTRO (Long-Term Repo Operations): Provides long-term liquidity to banks (1 to 3 years). Like regular repo but longer duration. TLTRO (Targeted LTRO): Directs liquidity to SPECIFIC sectors like SMBs, NBFCs. Banks get better terms if they lend to RBI-identified target sectors.'},
+  {cat:'debt',emoji:'📱',q:'What is RBI Retail Direct? What account does it provide?',a:'One-stop platform for individual investors to invest in G-Secs directly. Investors open Retail Direct Gilt (RDG) Account with RBI. Works in both primary market (buy new G-Secs) and secondary market (trade with other investors). Only G-Secs — no private securities.'},
+  {cat:'debt',emoji:'💻',q:'What is NDS-OM?',a:'Negotiated Dealing System — Order Matching. Works ONLY in secondary market for G-Secs. Matches buy and sell orders, then securities transfer. Launched August 2005 by RBI. Owned by RBI, administered by CCIL. CCIL acts as Central Counterparty.'},
+  {cat:'debt',emoji:'🖥️',q:'What is E-Kuber?',a:'Platform for PRIMARY market — investors submit bids for new G-Sec issues. Also the Core Banking Solution (CBS) of RBI — connects RBI with different banks on 24x7 basis. Owned and maintained by RBI.'},
+  {cat:'debt',emoji:'🏢',q:'What is CCIL and when was it set up?',a:'Clearing Corporation of India Limited. Set up April 2001. Acts as Central Counterparty (CCP) between buyers and sellers. Ensures full settlement. Process = Novation. Manages: NDS-Call (call market) + NDS-OM (secondary G-Secs) + Triparty Repo.'},
+  {cat:'debt',emoji:'🌍',q:'What is LIBOR and why was it discontinued for Indian banks?',a:'London Interbank Offered Rate. Global benchmark for international inter-bank short-term lending rates. In 2013, LIBOR scandal found financial irregularities. MIFOR (India) was dependent on LIBOR. RBI ruled: Indian banks CANNOT use LIBOR, MIFOR, or any LIBOR-dependent rate for international borrowings.'},
+  {cat:'debt',emoji:'💡',q:'What replaced LIBOR in India? What is SOFR?',a:'SOFR (Secured Overnight Financing Rate) identified as best replacement for LIBOR. India created Modified MIFOR (MMIFOR) based on SOFR. MMIFOR is currently used for international borrowing calculations in India.'},
+  {cat:'debt',emoji:'📑',q:'What are Primary Dealers?',a:'RBI-registered entities licensed to buy/sell government securities. Buy G-Secs directly from RBI in primary market, then resell to investors in secondary market. By doing this they CREATE a market for government securities.'},
+  {cat:'debt',emoji:'📦',q:'What are STRIPS?',a:'Separate Trading of Registered Interest and Principal of Securities. A coupon-bearing security stripped into multiple zero-coupon securities tradable separately. E.g., 10-year G-Sec with annual coupons becomes 1 principal component plus 11 individual coupon payment components.'},
+  {cat:'debt',emoji:'📋',q:'What are NCDs (Non-Convertible Debentures)?',a:'Fixed-income instruments by corporations. CANNOT convert to equity shares. Fixed or floating coupon rate. Repaid at maturity. Eligible issuers: companies, NBFCs, InvITs, REITs, AIFIs with net worth Rs 100 crore+. Demat form. Min denomination Rs 5 lakh. Tenor: 90 days to 1 year. Individual subscription capped at 25%.'},
+  {cat:'debt',emoji:'📝',q:'What are the 3 ways to hold G-Secs in India?',a:'1. SGL Account (Subsidiary General Ledger) — maintained with RBI by banks, PDs, FIs. 2. CSGL Account (Constituent SGL / SGL II) — for entities not eligible for SGL; open Gilt Account with bank/PD who maintains CSGL with RBI. 3. Demat Account with NSDL/CDSL — facilitates trading on stock exchanges.'},
 ];
 
 let filteredCards = [...allCards];
@@ -1245,6 +1744,28 @@ const allQuestions = [
   {q:'For Social Stock Exchange eligibility, what minimum % of revenue/activity must be in SEBI\'s social areas?',opts:['50%','60%','67%','75%'],ans:2,exp:'To qualify for SSE, an NPO or FPE must have at least 67% of revenue, expenditure, or beneficiaries linked to one or more of SEBI\'s 16 broad social activity areas.'},
   {q:'In rights issue, "Renunciation of Rights" means:',opts:['Shareholder demands more shares','Shareholder buys all available shares at full price','Shareholder declines rights and can sell them to others','Shareholder transfers rights to the company'],ans:2,exp:'Renunciation = shareholder DECLINES the rights issue offer and may sell their rights entitlements to other investors on the open market. They don\'t have to participate in the rights issue.'},
   {q:'BSE was founded in which year?',opts:['1857','1875','1947','1956'],ans:1,exp:'BSE (Bombay Stock Exchange) was founded in 1875, making it India\'s OLDEST stock exchange. It was also the FIRST stock exchange to receive SEBI recognition. Located on Dalal Street, Mumbai.'},
+  {q:'What is the key difference between FCCB and FCEB?',opts:['FCCB is in Indian Rupees; FCEB is in USD','FCCB converts to equity of SAME company; FCEB converts to equity of DIFFERENT company','FCCB is issued by government; FCEB by corporates','FCCB has no maturity; FCEB has defined maturity'],ans:1,exp:'FCCB converts to equity of the SAME issuing company at maturity. FCEB converts to equity of a DIFFERENT company. Both are foreign currency denominated hybrid debt+equity instruments regulated by RBI under FEMA.'},
+  {q:'T-Bills can be issued by which government?',opts:['Only State Governments','Only Central/Union Government','Both Central and State Governments','Neither — only RBI can issue them'],ans:1,exp:'Treasury Bills can ONLY be issued by the Central/Union Government. State governments CANNOT issue T-Bills. State governments can only issue long-term securities called State Development Loans (SDL).'},
+  {q:'What is the minimum denomination for investing in T-Bills?',opts:['Rs 1,000','Rs 5,000','Rs 10,000','Rs 1 lakh'],ans:2,exp:'T-Bills are issued in minimum denomination of Rs 10,000 and multiples thereof. This is the smallest amount an investor can use to purchase a T-Bill in the primary or secondary market.'},
+  {q:'Why are T-Bills called zero coupon instruments?',opts:['They give zero return','They have zero risk','No periodic interest — return comes from discount at issue','They are issued free of charge'],ans:2,exp:'T-Bills are called zero coupon because they do NOT make periodic interest payments. They are issued at a price LOWER than face value, and the return equals Face Value minus Issue Price. No coupon payments = zero-coupon securities.'},
+  {q:'Cash Management Bills (CMBs) are used when the government needs funds for:',opts:['More than 91 days','Exactly 91 days','Less than 91 days','More than 1 year'],ans:2,exp:'CMBs are used when the government needs funds for LESS THAN 91 days. If need is 91 days or more, government issues T-Bills instead. CMBs are also issued at discount and redeemed at face value, with T+1 settlement.'},
+  {q:'What is the maximum maturity for CDs issued by banks?',opts:['7 days','6 months','1 year','3 years'],ans:2,exp:'For CDs issued by banks: Minimum 7 days, Maximum 1 year. For Financial Institutions/AIFIs: Minimum 1 year, Maximum 3 years. Min amount = Rs 5 lakh. Loans CANNOT be granted against CDs.'},
+  {q:'Commercial Paper (CP) was introduced in India in which year?',opts:['1980','1990','1995','2000'],ans:1,exp:'Commercial Paper was introduced in India in 1990 to allow highly rated corporate borrowers to diversify their sources of short-term borrowings and to provide an additional instrument to investors. It is an unsecured promissory note.'},
+  {q:'What is the minimum credit rating required to issue Commercial Paper?',opts:['AAA','AA','A1','A3'],ans:3,exp:'The minimum credit rating for CP is A3 as per SEBI-prescribed rating symbols. Must be obtained from at least one SEBI-registered Credit Rating Agency. This ensures only creditworthy entities can access the CP market.'},
+  {q:'Who CANNOT participate in the Call Money Market?',opts:['Scheduled Commercial Banks','Primary Dealers','Non-banking institutions (except PDs)','Small Finance Banks'],ans:2,exp:'Non-banking institutions (except Primary Dealers) CANNOT participate in the Call Money Market. Only banks and specified entities like PDs, Payment Banks, RRBs, Small Finance Banks etc. are allowed. Non-bank entities use Triparty Repo instead.'},
+  {q:'Call Money, Notice Money, Term Money — what are their durations?',opts:['Call = 1 day; Notice = 2-14 days; Term = more than 14 days','Call = 7 days; Notice = 15-30 days; Term = more than 30 days','Call = overnight; Notice = 1 week; Term = 1 month','All three are for 1 day only'],ans:0,exp:'Call Money = 1 day (overnight). Notice Money = 2 to 14 days. Term Money = more than 14 days (usually 3 months to 1 year). These 3 segments form the interbank call market for short-term liquidity management.'},
+  {q:'What replaced CBLO in November 2018?',opts:['NDS-OM','SDF','Triparty Repo','LTRO'],ans:2,exp:'CBLO (Collateralized Borrowing and Lending Obligation) was discontinued in November 2018 and replaced by Triparty Repo. Reason: CBLO allowed private bonds/debentures as collateral while Triparty Repo ensures only high-quality Government Securities are used.'},
+  {q:'In a Repo transaction, who is the borrower?',opts:['RBI always','Banks (like SBI) borrow from RBI','RBI borrows from banks','Both borrow equally'],ans:1,exp:'In REPO: Banks are the BORROWERS. They sell securities (collateral) to RBI and receive cash. They repurchase the securities at maturity paying principal plus interest at Repo Rate. Repo INJECTS liquidity into the economy.'},
+  {q:'Reverse Repo is used by RBI to:',opts:['Inject liquidity into economy','Withdraw excess liquidity from economy','Fix home loan interest rates','Regulate the stock market'],ans:1,exp:'Reverse Repo is used to WITHDRAW excess liquidity. Banks lend surplus funds to RBI (banks = lenders, RBI = borrower). RBI provides G-Secs as collateral and pays interest at Reverse Repo Rate. Reduces money supply to control inflation.'},
+  {q:'What is the key difference between SDF and Reverse Repo?',opts:['SDF is for longer periods','SDF requires NO collateral; Reverse Repo requires G-Secs as collateral','SDF injects liquidity; Reverse Repo withdraws it','SDF is managed by SEBI'],ans:1,exp:'Both SDF and Reverse Repo withdraw liquidity. KEY DIFFERENCE: Reverse Repo requires RBI to provide G-Secs as collateral to banks. SDF allows banks to simply deposit funds with RBI with NO collateral required. SDF was introduced on April 8, 2022.'},
+  {q:'MSS (Market Stabilization Scheme) was introduced in which year?',opts:['1991','1997','2004','2008'],ans:2,exp:'MSS was introduced in April 2004. Used to withdraw excess liquidity by selling government securities (Market Stabilisation Bonds/MSBs). Money obtained is kept in a fixed account — govt CANNOT use it, as spending it would re-inject liquidity into the economy.'},
+  {q:'NDS-OM is maintained by whom and works in which market?',opts:['RBI; primary market','CCIL; secondary market for G-Secs','SEBI; both markets','RBI; both primary and secondary'],ans:1,exp:'NDS-OM (Negotiated Dealing System — Order Matching) is OWNED by RBI but administered and maintained by CCIL. It works ONLY in the SECONDARY market for Government Securities. Launched August 2005.'},
+  {q:'What does E-Kuber do?',opts:['Only manages govt expenditure','Only facilitates secondary market trading','Allows primary market bids AND serves as RBI Core Banking Solution','Regulates stock market operations'],ans:2,exp:'E-Kuber has two roles: (1) Platform for investors to submit bids for new G-Sec issues in the PRIMARY market. (2) Core Banking Solution (CBS) of RBI — connects RBI with all banks on 24x7 basis. Owned and maintained by RBI.'},
+  {q:'CCIL was set up in which year and what process does it perform?',opts:['1992; securitization','April 2001; novation','1935; dematerialization','1991; demutualization'],ans:1,exp:'CCIL (Clearing Corporation of India Limited) was set up in April 2001. It acts as Central Counterparty between buyer and seller ensuring full settlement. This process is called NOVATION. CCIL manages NDS-Call, NDS-OM, and Triparty Repo.'},
+  {q:'What replaced LIBOR in India for international borrowings?',opts:['MIBOR','SOFR directly','Modified MIFOR (MMIFOR) based on SOFR','Call Rate'],ans:2,exp:'After the 2013 LIBOR scandal and RBI ban on LIBOR-based rates, India adopted Modified MIFOR (MMIFOR) based on SOFR (Secured Overnight Financing Rate) as replacement. MMIFOR is currently used for international borrowing calculations in India.'},
+  {q:'What is the minimum subscription required for a ZCZP Bond?',opts:['50%','67%','75%','90%'],ans:2,exp:'For Zero Coupon Zero Principal Bonds: Minimum subscription = 75% of issue size. Min application = Rs 1,000. Min issue size = Rs 50 lakh. These bonds have no coupon and no principal repayment — pure structured philanthropy for social causes.'},
+  {q:'In a Social Impact Bond (SIB), who repays the investor on successful outcomes?',opts:['Private donor','NGO','Government','International financial institution'],ans:2,exp:'In SIB, the GOVERNMENT repays the investor upon verified successful outcomes. This is the KEY DIFFERENCE from DIB (Development Impact Bond) where a DONOR or FOUNDATION repays. Both are results-based funding structures for social programs.'},
+  {q:'The minimum base issue size for a public issue of debt securities is:',opts:['Rs 10 crore','Rs 50 crore','Rs 100 crore','Rs 500 crore'],ans:2,exp:'The minimum base issue size for any public issue of debt securities is Rs 100 crore. Issuers can retain oversubscription up to 100% of the base issue size. Minimum subscription required = 75%. If not received, money refunded within 12 days.'},
 ];
 
 let currentQ=0, score=0, answered=false, quizStarted=false;

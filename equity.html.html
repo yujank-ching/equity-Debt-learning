@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equity Market — Complete Learning App</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0e1a; --surface:#111827; --surface2:#1a2236; --surface3:#222f45;
+  --border:#1e2d47; --accent:#3b82f6; --accent2:#06d6a0; --accent3:#f59e0b;
+  --accent4:#f472b6; --accent5:#a78bfa; --text:#e2e8f0; --muted:#64748b;
+  --danger:#ef4444; --success:#22c55e;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+/* NAV */
+nav{display:flex;gap:6px;flex-wrap:wrap;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;align-items:center;}
+nav h1{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--accent);margin-right:8px;white-space:nowrap;}
+.nav-btn{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;transition:all .2s;}
+.nav-btn.active,.nav-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+/* SECTIONS */
+.section{display:none;padding:24px 20px;max-width:960px;margin:0 auto;}
+.section.active{display:block;animation:fadeIn .35s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px;}
+.card h2{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:12px;}
+.tag{display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:10px;}
+.tag.blue{background:#1e3a5f;color:var(--accent);}
+.tag.green{background:#0d3d2e;color:var(--accent2);}
+.tag.amber{background:#3d2a00;color:var(--accent3);}
+.tag.pink{background:#3d1030;color:var(--accent4);}
+.tag.purple{background:#2d1f5e;color:var(--accent5);}
+
+/* HOME */
+.hero{text-align:center;padding:36px 16px 24px;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,44px);font-weight:800;line-height:1.1;}
+.hero h1 span{color:var(--accent);}
+.hero p{color:var(--muted);margin-top:10px;font-size:15px;max-width:480px;margin-left:auto;margin-right:auto;}
+.topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:24px;}
+.topic-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:all .2s;text-align:left;}
+.topic-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.topic-card .icon{font-size:22px;margin-bottom:6px;}
+.topic-card h3{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.topic-card p{color:var(--muted);font-size:11px;margin-top:3px;}
+
+/* SUMMARY */
+.summary-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.s-btn{padding:6px 13px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:12px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.s-btn.active,.s-btn:hover{background:var(--surface2);color:var(--text);border-color:var(--accent);}
+.summary-content{display:none;}
+.summary-content.active{display:block;animation:fadeIn .3s ease;}
+
+/* INFO BOXES */
+.info-box{background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:13px;line-height:1.7;}
+.info-box.green{border-color:var(--accent2);}
+.info-box.amber{border-color:var(--accent3);}
+.info-box.pink{border-color:var(--accent4);}
+.info-box.purple{border-color:var(--accent5);}
+.info-box.red{border-color:var(--danger);}
+
+/* TABLES */
+.compare-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px;}
+.compare-table th{background:var(--surface2);padding:9px 11px;text-align:left;font-family:'Syne',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
+.compare-table td{padding:9px 11px;border-top:1px solid var(--border);vertical-align:top;}
+.compare-table tr:hover td{background:var(--surface2);}
+.badge{display:inline-block;padding:2px 7px;border-radius:8px;font-size:11px;font-weight:600;}
+.badge.yes{background:#0d3d2e;color:var(--accent2);}
+.badge.no{background:#3d1010;color:var(--danger);}
+.badge.first{background:#1e3a5f;color:var(--accent);}
+.badge.second{background:#3d2a00;color:var(--accent3);}
+
+/* FLOW */
+.flow-steps{display:flex;flex-direction:column;gap:0;}
+.flow-step{display:flex;gap:12px;align-items:flex-start;}
+.flow-step .num{min-width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.flow-step .content{flex:1;padding-bottom:4px;}
+.flow-step .content h4{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.flow-step .content p{color:var(--muted);font-size:12px;margin-top:2px;line-height:1.55;}
+.flow-line{width:2px;height:16px;background:var(--border);margin-left:13px;}
+
+/* PILLS */
+.pill-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;}
+.pill{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:4px 11px;font-size:12px;}
+.pill.a{border-color:var(--accent);color:var(--accent);background:#0d1f3c;}
+.pill.g{border-color:var(--accent2);color:var(--accent2);background:#062d22;}
+.pill.am{border-color:var(--accent3);color:var(--accent3);background:#2a1a00;}
+.pill.pk{border-color:var(--accent4);color:var(--accent4);background:#2a0a1a;}
+.pill.pu{border-color:var(--accent5);color:var(--accent5);background:#1a1040;}
+
+h3.sub{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin:16px 0 7px;color:var(--accent3);}
+p.body-text{font-size:13px;line-height:1.7;color:var(--muted);margin:6px 0;}
+
+/* MINI GRID */
+.mini-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:10px;}
+.mini-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:13px;font-size:12.5px;line-height:1.6;}
+.mini-card strong{color:var(--text);font-size:13px;}
+
+/* FLASHCARDS */
+.fc-progress{display:flex;align-items:center;gap:10px;margin-bottom:16px;font-size:12px;color:var(--muted);}
+.fc-bar{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;}
+.fc-bar-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s ease;}
+.flashcard{width:100%;max-width:640px;margin:0 auto;height:240px;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform .5s ease;perspective:1200px;}
+.flashcard.flipped{transform:rotateY(180deg);}
+.fc-face{position:absolute;inset:0;border-radius:14px;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--border);}
+.fc-front{background:var(--surface);}
+.fc-back{background:var(--surface2);border-color:var(--accent);transform:rotateY(180deg);}
+.fc-front .emoji{font-size:32px;margin-bottom:10px;}
+.fc-front .question{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;line-height:1.4;}
+.fc-front .hint{color:var(--muted);font-size:11px;margin-top:8px;}
+.fc-back .answer{font-size:13.5px;line-height:1.7;color:var(--text);}
+.fc-back .answer strong{color:var(--accent2);}
+.fc-controls{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
+.fc-btn{padding:9px 22px;border-radius:9px;border:none;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all .2s;}
+.fc-btn.prev,.fc-btn.next{background:var(--surface2);color:var(--text);}
+.fc-btn.flip{background:var(--accent);color:#fff;}
+.fc-btn:hover{opacity:.85;transform:translateY(-1px);}
+.fc-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+
+/* QUIZ */
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.quiz-score{font-family:'Syne',sans-serif;font-size:13px;}
+.quiz-score span{color:var(--accent2);font-weight:700;font-size:17px;}
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;}
+.q-num{color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.q-text{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin:9px 0 18px;line-height:1.4;}
+.options{display:flex;flex-direction:column;gap:9px;}
+.opt{padding:12px 16px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;font-size:13px;transition:all .2s;text-align:left;color:var(--text);font-family:'DM Sans',sans-serif;}
+.opt:hover:not(:disabled){border-color:var(--accent);background:#0d1f3c;}
+.opt.correct{border-color:var(--success);background:#0a2e1a;color:var(--success);}
+.opt.wrong{border-color:var(--danger);background:#2e0a0a;color:var(--danger);}
+.opt:disabled{cursor:default;}
+.explanation{margin-top:14px;padding:12px;background:var(--surface2);border-radius:9px;font-size:12.5px;line-height:1.6;border-left:3px solid var(--accent2);display:none;}
+.explanation.show{display:block;animation:fadeIn .3s ease;}
+.q-next{margin-top:14px;padding:10px 24px;border-radius:9px;border:none;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;display:none;transition:all .2s;}
+.q-next.show{display:inline-block;}
+.q-next:hover{opacity:.85;}
+.quiz-result{text-align:center;padding:36px 16px;}
+.big-score{font-family:'Syne',sans-serif;font-size:68px;font-weight:800;}
+.big-score.great{color:var(--accent2);}
+.big-score.ok{color:var(--accent3);}
+.big-score.low{color:var(--danger);}
+.quiz-result h3{font-family:'Syne',sans-serif;font-size:20px;margin:8px 0;}
+.quiz-result p{color:var(--muted);margin-bottom:20px;}
+.restart-btn{padding:11px 26px;border-radius:9px;border:none;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;}
+
+/* CHEATSHEET */
+.cheat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.cheat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;}
+.cheat-card h3{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:7px;}
+.cheat-card ul{list-style:none;}
+.cheat-card ul li{font-size:12px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border);line-height:1.55;}
+.cheat-card ul li:last-child{border:none;}
+.cheat-card ul li strong{color:var(--text);}
+.numbers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-top:12px;}
+.num-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:13px;text-align:center;}
+.num-card .big-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--accent);}
+.num-card .label{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4;}
+
+@media(max-width:600px){
+  nav{padding:8px 10px;}
+  .section{padding:16px 12px;}
+  .hero h1{font-size:22px;}
+  .flashcard{height:280px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <h1>📈 EquiLearn Pro</h1>
+  <button class="nav-btn active" onclick="showSection('home',this)">🏠 Home</button>
+  <button class="nav-btn" onclick="showSection('summary',this)">📖 Summary</button>
+  <button class="nav-btn" onclick="showSection('flashcards',this)">🃏 Flashcards</button>
+  <button class="nav-btn" onclick="showSection('quiz',this)">🧠 Quiz</button>
+  <button class="nav-btn" onclick="showSection('cheatsheet',this)">⚡ Cheatsheet</button>
+</nav>
+
+<!-- ═══════════════ HOME ═══════════════ -->
+<div id="home" class="section active">
+  <div class="hero">
+    <h1>Complete <span>Equity Market</span><br>Learning App</h1>
+    <p>Every concept, number, term, law, and example from your chapter — nothing skipped.</p>
+  </div>
+  <div class="topics-grid">
+    <div class="topic-card" onclick="goToSummary('why')"><div class="icon">💡</div><h3>Why Debt & Equity?</h3><p>Intro, shares, features</p></div>
+    <div class="topic-card" onclick="goToSummary('markets')"><div class="icon">🏦</div><h3>Primary & Secondary</h3><p>Capital, money, forex markets</p></div>
+    <div class="topic-card" onclick="goToSummary('sharetypes')"><div class="icon">📄</div><h3>Types of Shares</h3><p>Equity, preference, face value</p></div>
+    <div class="topic-card" onclick="goToSummary('prefshare')"><div class="icon">⭐</div><h3>Preference Share Types</h3><p>Cumulative, convertible, etc.</p></div>
+    <div class="topic-card" onclick="goToSummary('primary1')"><div class="icon">🎁</div><h3>Primary Offerings Pt1</h3><p>Bonus, Rights, Private, ESOP</p></div>
+    <div class="topic-card" onclick="goToSummary('ipo')"><div class="icon">🚀</div><h3>IPO & FPO</h3><p>Going public explained</p></div>
+    <div class="topic-card" onclick="goToSummary('ipoprocess')"><div class="icon">🔢</div><h3>IPO Process (7 Steps)</h3><p>Full step-by-step breakdown</p></div>
+    <div class="topic-card" onclick="goToSummary('exchanges')"><div class="icon">📊</div><h3>BSE & NSE</h3><p>SENSEX, NIFTY, laws</p></div>
+    <div class="topic-card" onclick="goToSummary('participants')"><div class="icon">🏛️</div><h3>Market Participants</h3><p>Brokers, depositories, clearing</p></div>
+    <div class="topic-card" onclick="goToSummary('investors')"><div class="icon">👥</div><h3>Investor Types (IPO)</h3><p>QIB, Retail, NII, Anchor</p></div>
+    <div class="topic-card" onclick="goToSummary('asba')"><div class="icon">🔒</div><h3>ASBA & Regulation</h3><p>Blocked amount, IPO rules</p></div>
+    <div class="topic-card" onclick="goToSummary('trades')"><div class="icon">💼</div><h3>Bulk & Block Trades</h3><p>Special trade types</p></div>
+    <div class="topic-card" onclick="goToSummary('dr')"><div class="icon">🌍</div><h3>Depository Receipts</h3><p>ADR, GDR, IDR process</p></div>
+    <div class="topic-card" onclick="goToSummary('fdi')"><div class="icon">💱</div><h3>FDI, FPI & P-Notes</h3><p>Foreign investment types</p></div>
+    <div class="topic-card" onclick="goToSummary('misc2')"><div class="icon">🔧</div><h3>Misc: Green Shoe etc.</h3><p>Demutualization, delisting</p></div>
+    <div class="topic-card" onclick="goToSummary('sse')"><div class="icon">🌱</div><h3>Social Stock Exchange</h3><p>SSE, NPO, FPE, ZCZP</p></div>
+  </div>
+</div>
+
+<!-- ═══════════════ SUMMARY ═══════════════ -->
+<div id="summary" class="section">
+  <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:14px;">📖 Complete Topic Summaries</h2>
+  <div class="summary-nav">
+    <button class="s-btn active" onclick="showSummary('why',this)">💡 Basics</button>
+    <button class="s-btn" onclick="showSummary('markets',this)">🏦 Markets</button>
+    <button class="s-btn" onclick="showSummary('sharetypes',this)">📄 Share Types</button>
+    <button class="s-btn" onclick="showSummary('prefshare',this)">⭐ Pref. Shares</button>
+    <button class="s-btn" onclick="showSummary('primary1',this)">🎁 Offerings</button>
+    <button class="s-btn" onclick="showSummary('ipo',this)">🚀 IPO/FPO</button>
+    <button class="s-btn" onclick="showSummary('ipoprocess',this)">🔢 IPO Process</button>
+    <button class="s-btn" onclick="showSummary('exchanges',this)">📊 Exchanges</button>
+    <button class="s-btn" onclick="showSummary('participants',this)">🏛️ Participants</button>
+    <button class="s-btn" onclick="showSummary('investors',this)">👥 Investors</button>
+    <button class="s-btn" onclick="showSummary('asba',this)">🔒 ASBA</button>
+    <button class="s-btn" onclick="showSummary('trades',this)">💼 Trades</button>
+    <button class="s-btn" onclick="showSummary('dr',this)">🌍 DRs</button>
+    <button class="s-btn" onclick="showSummary('fdi',this)">💱 FDI/FPI</button>
+    <button class="s-btn" onclick="showSummary('misc2',this)">🔧 Misc</button>
+    <button class="s-btn" onclick="showSummary('sse',this)">🌱 SSE</button>
+  </div>
+
+  <!-- WHY EQUITY -->
+  <div class="summary-content active" id="sc-why">
+    <div class="card">
+      <div class="tag blue">Chapter 1 — Foundation</div>
+      <h2>💡 Why Debt & Equity? Introduction to Equity & Shares</h2>
+      <div class="info-box amber"><strong>Real Story:</strong> Reliance needs ₹20,000 crores to expand. Instead of a complex bank loan, it approaches the public. It can give them either <strong>ownership (equity)</strong> or <strong>a loan arrangement (debt)</strong>. Both are ways to raise funds from the general public.</div>
+      <h3 class="sub">What is Equity?</h3>
+      <p class="body-text">When Reliance sells equity to the public, it offers <strong>ownership stakes</strong> in the company. External investors become shareholders — they hold a portion of Reliance's ownership. In exchange, they provide funds used for development and operations.</p>
+      <h3 class="sub">What is a Share?</h3>
+      <p class="body-text">A share = a unit of ownership in a company. Ram buys 100 shares of Reliance = Ram has purchased 100 units of ownership. Each share = a fractional ownership interest.</p>
+      <div class="info-box">Capital = accounting term for the amount of money needed to run the business.<br><strong>Equity capital</strong> = funds raised by offering ownership in the form of shares to investors.</div>
+      <h3 class="sub">11 Features of Equity</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>1. Issuer & Investor</strong><br><span style="color:var(--muted)">Issuer = entity offering shares. Investor = person buying shares (general public).</span></div>
+        <div class="mini-card"><strong>2. Management & Control</strong><br><span style="color:var(--muted)">Issuing shares distributes ownership among many shareholders. Reduces single-entity control.</span></div>
+        <div class="mini-card"><strong>3. Dilution of Control</strong><br><span style="color:var(--muted)">Issuing more shares reduces existing shareholders' ownership %. Their decision-making authority decreases.</span></div>
+        <div class="mini-card"><strong>4. Dividends</strong><br><span style="color:var(--muted)">Return that equity investors receive. A reward for financing the company's operations.</span></div>
+        <div class="mini-card"><strong>5. Variable Return</strong><br><span style="color:var(--muted)">Dividends fluctuate based on company profitability. NOT predetermined. High profit → higher dividends, and vice versa.</span></div>
+        <div class="mini-card"><strong>6. Relationship</strong><br><span style="color:var(--muted)">Issuer offers shares. Shareholder buys and holds them → becomes a partial owner of the company.</span></div>
+        <div class="mini-card"><strong>7. Voting Rights</strong><br><span style="color:var(--muted)">"One share, one vote" principle. Larger shareholders have more influence. Ensures fairness in corporate governance.</span></div>
+        <div class="mini-card"><strong>8. Risk in Equity</strong><br><span style="color:var(--muted)">Dividends are variable. If company doesn't generate profit, shareholders may receive no dividends → financial risk.</span></div>
+        <div class="mini-card"><strong>9. Claim over Assets</strong><br><span style="color:var(--muted)">Shareholders gain ownership rights over company assets (machines, land), limited to their % shareholding.</span></div>
+        <div class="mini-card"><strong>10. Long-term Money</strong><br><span style="color:var(--muted)">No fixed maturity period. Returns typically come when company dissolves/liquidates. Long-term investment.</span></div>
+        <div class="mini-card"><strong>11. Inside vs Outside Shareholders</strong><br><span style="color:var(--muted)">Inside = executives, directors, employees involved in management. Outside = investors not in day-to-day management.</span></div>
+      </div>
+      <h3 class="sub">Share vs Stock vs Equity</h3>
+      <div class="info-box amber">
+        <strong>Share</strong> = Ownership unit in ONE specific company (e.g., Reliance shares)<br>
+        <strong>Stock</strong> = A broader portfolio of shares from MULTIPLE companies (Reliance + Adani + Bajaj = Stock portfolio)<br>
+        <strong>Equity</strong> = The overall concept of ownership via financial instruments
+      </div>
+    </div>
+  </div>
+
+  <!-- MARKETS -->
+  <div class="summary-content" id="sc-markets">
+    <div class="card">
+      <div class="tag green">Chapter 2</div>
+      <h2>🏦 Primary & Secondary Market</h2>
+      <h3 class="sub">Types of Financial Markets</h3>
+      <table class="compare-table">
+        <tr><th>Market</th><th>What is traded</th><th>Duration</th></tr>
+        <tr><td><strong>Capital Market</strong> (Securities Market)</td><td>Securities — shares, bonds, etc.</td><td>&gt;1 year maturity</td></tr>
+        <tr><td><strong>Money Market</strong></td><td>Short-term securities</td><td>&lt;1 year maturity</td></tr>
+        <tr><td><strong>Forex Market</strong></td><td>Foreign currency</td><td>—</td></tr>
+      </table>
+      <h3 class="sub">Capital Market splits into:</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>Equity Market</strong><br><span style="color:var(--muted)">Buying/selling of equity instruments (shares). Companies distribute ownership to the public.</span></div>
+        <div class="mini-card"><strong>Debt Market</strong><br><span style="color:var(--muted)">Buying/selling of debt instruments (bonds). Represents loans by investors to governments/corporations.</span></div>
+      </div>
+      <h3 class="sub">Primary vs Secondary Market</h3>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Primary Market</th><th>Secondary Market</th></tr>
+        <tr><td>Definition</td><td>Securities issued for the VERY FIRST TIME by company directly to public</td><td>One investor buys/sells from another investor</td></tr>
+        <tr><td>Company role</td><td>Company directly involved, receives money</td><td>Company has NO role</td></tr>
+        <tr><td>Examples</td><td>IPO, FPO, Rights Issue, Bonus Issue</td><td>Daily trading on NSE, BSE</td></tr>
+        <tr><td>Money goes to</td><td>Issuing company</td><td>Selling investor</td></tr>
+      </table>
+      <div class="info-box green">💡 <strong>Memory trick:</strong> Primary = Birth of a security (company gets money). Secondary = Its trading life after birth (company not involved).</div>
+    </div>
+  </div>
+
+  <!-- SHARE TYPES -->
+  <div class="summary-content" id="sc-sharetypes">
+    <div class="card">
+      <div class="tag amber">Chapter 3 Part 1</div>
+      <h2>📄 Shares & Different Types of Shares</h2>
+      <div class="info-box">Shares were originally issued as physical certificates signed by the company. Today, shares are traded and transferred <strong>electronically/digitally</strong>.</div>
+      <h3 class="sub">Share Pricing Terms</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>Face Value (Par Value)</strong><br><span style="color:var(--muted)">Original cost printed on the share certificate. Dividend is calculated on face value.<br>Example: Face value ₹10, dividend declared 50% → dividend = ₹5 per share.</span></div>
+        <div class="mini-card"><strong>Issue Price</strong><br><span style="color:var(--muted)">Price at which company sells shares in the primary market to the general public.</span></div>
+        <div class="mini-card"><strong>Current Market Price</strong><br><span style="color:var(--muted)">Price at which shares trade on NSE/BSE (secondary market). Decided by market forces and company performance.</span></div>
+      </div>
+      <h3 class="sub">Equity Shares vs Preference Shares</h3>
+      <p class="body-text">Preference shareholders get TWO main preferences over equity shareholders:</p>
+      <div class="pill-row"><div class="pill a">① Priority in Dividend Payment</div><div class="pill g">② Priority in Asset Liquidation</div></div>
+      <table class="compare-table" style="margin-top:12px;">
+        <tr><th>Basis</th><th>Equity Shares</th><th>Preference Shares</th></tr>
+        <tr><td>Meaning</td><td>Ordinary/common shares. Represent part-ownership.</td><td>Carry preferential rights on dividends and capital repayment.</td></tr>
+        <tr><td>Dividend payment order</td><td>Paid AFTER preference shareholders</td><td>Paid FIRST</td></tr>
+        <tr><td>Dividend amount</td><td>Not fixed — variable</td><td>Fixed</td></tr>
+        <tr><td>Repayment of capital</td><td><span class="badge second">2nd Priority</span></td><td><span class="badge first">1st Priority</span></td></tr>
+        <tr><td>Participation in management</td><td><span class="badge yes">YES</span></td><td><span class="badge no">NO</span></td></tr>
+        <tr><td>Voting rights</td><td><span class="badge yes">YES</span></td><td><span class="badge no">NO</span></td></tr>
+        <tr><td>Real owners?</td><td><span class="badge yes">YES</span></td><td><span class="badge no">NO</span></td></tr>
+      </table>
+      <div class="info-box amber" style="margin-top:12px;">
+        📌 <strong>Dividend Example:</strong><br>
+        Reliance profit = ₹10. Retained earnings = ₹5. Distributable = ₹5.<br>
+        Preference shareholder (Sham) gets: ₹2 (fixed). Equity shareholder (Ram) gets: ₹3.<br><br>
+        If retained earnings = ₹8 out of ₹10 profit → Only ₹2 left → Sham gets ₹2 (full fixed dividend), Ram gets ₹0.
+      </div>
+    </div>
+  </div>
+
+  <!-- PREFERENCE SHARE TYPES -->
+  <div class="summary-content" id="sc-prefshare">
+    <div class="card">
+      <div class="tag purple">Chapter 3 — Preference Share Types</div>
+      <h2>⭐ Types of Preference Shares</h2>
+      <div class="info-box purple">The process of issuing preference shares by a company is called a <strong>Preferential Issue</strong>.</div>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>1. Convertible Preference Shares</strong><br><span style="color:var(--muted)">Can be converted into ordinary equity shares at agreed terms and conditions.</span></div>
+        <div class="mini-card"><strong>1b. Non-Convertible</strong><br><span style="color:var(--muted)">NO option to convert into equity shares. Stays as preference shares only.</span></div>
+        <div class="mini-card"><strong>2. Redeemable Preference Shares</strong><br><span style="color:var(--muted)">Have a maturity date on which company repays capital and stops dividends.</span></div>
+        <div class="mini-card"><strong>2b. Irredeemable Preference Shares</strong><br><span style="color:var(--muted)">No maturity date. Company does not have a fixed obligation to repay capital.</span></div>
+        <div class="mini-card"><strong>3. Participating Preference Shares</strong><br><span style="color:var(--muted)">Can participate in extra profits of the company APART from the fixed dividend.</span></div>
+        <div class="mini-card"><strong>3b. Non-Participating</strong><br><span style="color:var(--muted)">Do NOT share in extra earnings or surplus assets during liquidation.</span></div>
+        <div class="mini-card"><strong>4. Cumulative Preference Shares</strong><br><span style="color:var(--muted)">Entitled to receive ALL unpaid dividends from PAST periods + current dividend, even if company skipped payments due to insufficient profits.</span></div>
+        <div class="mini-card"><strong>4b. Non-Cumulative</strong><br><span style="color:var(--muted)">Cannot claim unpaid dividends from previous years. Only current year dividend if declared.</span></div>
+      </div>
+      <div class="info-box red">📌 <strong>Legal Limit (Section 55, Companies Act 2013):</strong><br>
+        Preference shares: max <strong>20 years</strong> from date of issue.<br>
+        Infrastructure companies: max <strong>30 years</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIMARY MARKET OFFERINGS -->
+  <div class="summary-content" id="sc-primary1">
+    <div class="card">
+      <div class="tag green">Chapter 3 — Primary Market Offerings</div>
+      <h2>🎁 Bonus Issue, Rights Shares, Private Placement & ESOP</h2>
+      <h3 class="sub">Bonus Issue (Scrip Issue / Capitalisation Issue)</h3>
+      <p class="body-text">An offer of <strong>free additional shares</strong> to existing shareholders. Used when company is short on cash but wants to reward shareholders. Alternative to paying cash dividends.</p>
+      <div class="info-box">
+        • No money collected from investors — NO cash flow to company.<br>
+        • Shareholders can sell bonus shares to meet liquidity needs.<br>
+        • Issued proportionally to each shareholder's existing stake.<br>
+        • <strong>Example:</strong> 3:2 bonus → 3 shares for every 2 held. If you hold 1,000 shares → 1,000 × 3/2 = <strong>1,500 bonus shares</strong>.
+      </div>
+      <h3 class="sub">Rights Issue</h3>
+      <p class="body-text">An invitation to <strong>existing shareholders</strong> to buy additional new shares at a <strong>discounted price</strong> compared to market price, on a specified future date.</p>
+      <div class="info-box green">
+        • Unlike Bonus Issue, shareholder must PAY for rights shares.<br>
+        • Shareholder can opt in (pay and get shares) OR opt out.<br>
+        • <strong>Why do companies do this?</strong> To raise more capital for expansion (can't use bonus since that gives free shares).<br>
+        • <strong>Renunciation of Rights:</strong> Shareholders can decline rights and sell their rights entitlements to other investors in the open market.
+      </div>
+      <h3 class="sub">Bonus vs Rights — Quick Comparison</h3>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Bonus Issue</th><th>Rights Issue</th></tr>
+        <tr><td>Who receives</td><td>Existing shareholders</td><td>Existing shareholders (option given)</td></tr>
+        <tr><td>Price paid</td><td>FREE</td><td>Discounted price (below market)</td></tr>
+        <tr><td>Money to company</td><td><span class="badge no">NO</span></td><td><span class="badge yes">YES</span></td></tr>
+        <tr><td>Purpose</td><td>Reward shareholders (no cash)</td><td>Raise capital for expansion</td></tr>
+        <tr><td>Can decline?</td><td>N/A</td><td>YES — can renounce rights</td></tr>
+      </table>
+      <h3 class="sub">Private Placement</h3>
+      <p class="body-text">A company offers its securities to a <strong>specific, identified group</strong> of investors (e.g., financial institutions, mutual funds) — NOT the general public.</p>
+      <div class="info-box amber">
+        • Per Companies Act 2013: offer to <strong>not more than 200 persons</strong>.<br>
+        • SEBI's public issue regulations do NOT apply.<br>
+        • Offer made by name to identified persons.<br>
+        • Details filed with Registrar of Companies.<br>
+        • Payment <strong>only through banking channels</strong> — NOT by cash.<br>
+        • Advantages: investors are informed, fewer regulations, less time-consuming, cost-efficient.
+      </div>
+      <h3 class="sub">ESOP — Employee Stock Option Plan</h3>
+      <p class="body-text">Shares issued to the <strong>employees</strong> of the company. Recipients are called <strong>internal shareholders</strong> because they are actively involved in the company's functioning, not just investing.</p>
+    </div>
+  </div>
+
+  <!-- IPO & FPO -->
+  <div class="summary-content" id="sc-ipo">
+    <div class="card">
+      <div class="tag pink">Chapter 4</div>
+      <h2>🚀 IPO & FPO — Offering in Primary Market (Part 2)</h2>
+      <div class="info-box">Stock exchanges (NSE, BSE) = platforms/middlemen where shares are bought and sold. Companies issue equity via two main routes: <strong>IPO</strong> and <strong>FPO</strong>.</div>
+      <h3 class="sub">IPO — Initial Public Offering</h3>
+      <p class="body-text">Process through which a <strong>privately held company becomes public</strong> by offering shares to the public for the FIRST TIME. Private company = only a few insiders/initial owners held shares. IPO is a primary market event (company directly issues to investors).</p>
+      <div class="info-box green"><strong>Listing</strong> = The process of a company getting registered on stock exchanges, which allows its shares to be traded on the open market. Happens when a company issues an IPO for the first time.</div>
+      <h3 class="sub">FPO — Follow-on Public Offering</h3>
+      <p class="body-text">A subsequent offering of additional shares by a company that is <strong>already listed</strong> on the Indian stock market. No need to re-register.</p>
+      <div class="info-box amber">Example: Reliance lists on Jan 1, 2020 (IPO). On Jan 1, 2024, if Reliance needs more capital, it does an FPO — no new registration needed.</div>
+      <h3 class="sub">Fresh Issue vs Offer for Sale (OFS)</h3>
+      <p class="body-text">Both IPO and FPO can be structured as either Fresh Issue or Offer for Sale:</p>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Fresh Issue</th><th>Offer for Sale (OFS)</th></tr>
+        <tr><td>New shares issued?</td><td><span class="badge yes">YES — new shares created</span></td><td><span class="badge no">NO — existing shares sold</span></td></tr>
+        <tr><td>Money goes to</td><td>Company's treasury</td><td>Existing selling shareholders (promoters/early investors)</td></tr>
+        <tr><td>Company receives funds?</td><td><span class="badge yes">YES</span></td><td><span class="badge no">NO</span></td></tr>
+        <tr><td>Purpose</td><td>Expansion, debt reduction, corporate initiatives</td><td>Promoters/investors exit or reduce stake</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- IPO PROCESS -->
+  <div class="summary-content" id="sc-ipoprocess">
+    <div class="card">
+      <div class="tag blue">Chapter 5 — 7 Steps</div>
+      <h2>🔢 Complete IPO Process (7 Steps)</h2>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="num">1</div><div class="content"><h4>Register on Indian Stock Market (Listing)</h4><p>Company registers on NSE or BSE. Must declare the SIZE of IPO:<br>
+        <strong>(A) Quantity:</strong> Number of shares to be issued — decided by Board of Directors.<br>
+        <strong>(B) Value:</strong> Total number of shares × Price per share = monetary value of IPO.</p></div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="num">2</div><div class="content"><h4>Select a Merchant Banker (Investment Banker / Lead Manager)</h4><p>Manages the entire IPO. Services include:<br>
+        • <strong>Banking services:</strong> Collects money from public, transfers to company.<br>
+        • <strong>Underwriting:</strong> Guarantee service (explained in Step 3).<br>
+        • <strong>Pre-IPO support:</strong> Activities leading up to IPO launch.<br>
+        • <strong>Post-IPO support:</strong> Helps company thrive in public markets after listing.<br>
+        Also called: Lead Bank, Banker to the Issue, Lead Manager.</p></div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="num">3</div><div class="content"><h4>Select an Underwriter</h4><p>Provides financial stability to the IPO.<br>
+        • SEBI rule: <strong>Minimum 90% of issue size must be subscribed.</strong><br>
+        • If IPO is undersubscribed (below 90%), the underwriter buys the shortfall shares.<br>
+        • Example: Only 84% subscribed → Underwriter buys remaining 6% → crosses 90% mark.<br>
+        • If 90% is reached organically, underwriter need NOT buy.<br>
+        • Generally, <strong>underwriting services are provided by the merchant banker itself.</strong><br>
+        • <strong>Undersubscription:</strong> Demand for shares &lt; shares offered (low investor interest).<br>
+        • <strong>Oversubscription:</strong> Demand for shares &gt; shares available (strong investor interest).</p></div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="num">4</div><div class="content"><h4>Draft Documents (Prospectus)</h4><p>A prospectus = legally mandated document with comprehensive company details — empowers investors to make informed decisions.<br><br>
+        📄 <strong>Red Herring Prospectus:</strong> Submitted to regulatory authorities before IPO launch. Includes company finances, operations, risks. LACKS final price and share numbers. Once approved, a final prospectus with specific details is issued.<br><br>
+        📄 <strong>Abridged Prospectus:</strong> Summary/shorter version of Red Herring Prospectus. Contains all important details in concise form.<br><br>
+        📄 <strong>Letter of Offer:</strong> Issued ONLY when company is going for a Rights Issue. (NOT for IPO/FPO.)</p></div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="num">5</div><div class="content"><h4>Road Show (Marketing)</h4><p>Company initiates a marketing campaign to promote awareness of the IPO. Reaches out to potential investors and creates awareness about the opportunity to invest.</p></div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="num">6</div><div class="content"><h4>Pricing of Securities</h4><p>Two methods to determine share price:<br><br>
+        💰 <strong>Fixed Price Issue:</strong> Company publicly declares a SET price. Example: Reliance quotes ₹100/share. Ram wants 20 shares → pays ₹2,000 (20 × ₹100). Simple and transparent.<br><br>
+        📊 <strong>Book Building Issue:</strong> Company gives a PRICE RANGE (e.g., ₹96–₹100). Investors bid within the range at prices like ₹96, ₹97, ₹98, ₹99, ₹100.<br>
+        • Lower limit = <strong>Floor Price / Lower Band</strong><br>
+        • Upper limit = <strong>Cap Price / Higher Band</strong><br>
+        • <strong>SEBI Rule:</strong> Difference between upper and lower band cannot exceed <strong>20%</strong>.<br>
+        • Example: Floor ₹100 → Cap cannot exceed ₹120.<br>
+        • Final issue price = price at which HIGHEST number of bids received (market forces decide).</p></div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="num">7</div><div class="content"><h4>Selling of Securities (Allotment)</h4><p>Company finalizes sale of shares. Shares allocated to investors. Investors receive shares and make payments to the issuing company.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXCHANGES & REGULATION -->
+  <div class="summary-content" id="sc-exchanges">
+    <div class="card">
+      <div class="tag blue">Chapter 6 — Indian Stock Market</div>
+      <h2>📊 Indian Stock Market — Regulation Side</h2>
+      <div class="info-box"><strong>SEBI</strong> (Securities and Exchange Board of India) = Regulatory body for the capital market and equity market in India. Has power to regulate and penalize registered stock markets and stockbrokers.</div>
+      <h3 class="sub">Key Laws Governing Indian Capital Market</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>A. SEBI Act, 1992</strong><br><span style="color:var(--muted)">Gave SEBI statutory powers for:<br>• Protecting investor interests<br>• Promoting securities market development<br>• Regulating the securities market</span></div>
+        <div class="mini-card"><strong>B. Securities Contracts (Regulation) Act, 1956</strong><br><span style="color:var(--muted)">Regulates securities trading and stock exchanges. Prevents undesirable transactions. Central Govt has regulatory jurisdiction over stock exchanges, contracts, and listings.</span></div>
+        <div class="mini-card"><strong>C. Depositories Act, 1996</strong><br><span style="color:var(--muted)">Facilitates establishment of depositories. Enables dematerialization of securities. Makes securities freely transferable. Electronic transfer of ownership — no physical movement needed. Eliminates transfer deeds.</span></div>
+        <div class="mini-card"><strong>D. Prevention of Money Laundering Act (PMLA), 2002</strong><br><span style="color:var(--muted)">Primary objective: Prevent money laundering and provide for confiscation of property derived from money laundering. Money laundering = acquiring, owning, possessing or transferring proceeds of crime.</span></div>
+      </div>
+      <div class="info-box purple" style="margin-top:12px;"><strong>IOSCO</strong> = International Organization of Securities Commissions. Global body that sets standards for regulating securities markets — ensures fairness, transparency, and investor protection worldwide. Promotes cooperation among securities regulators across countries.</div>
+      <h3 class="sub">BSE vs NSE</h3>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>BSE (Bombay Stock Exchange)</th><th>NSE (National Stock Exchange)</th></tr>
+        <tr><td>Founded</td><td><strong>1875</strong> — Oldest in India</td><td><strong>1992</strong></td></tr>
+        <tr><td>First SEBI recognition</td><td><span class="badge yes">YES (First stock exchange)</span></td><td>—</td></tr>
+        <tr><td>Index</td><td><strong>SENSEX</strong> (Sensitivity Index)</td><td><strong>NIFTY</strong> (National Fifty)</td></tr>
+        <tr><td>Index launched</td><td>January 1, 1986</td><td>—</td></tr>
+        <tr><td>No. of stocks in index</td><td>30 stocks</td><td>50 stocks</td></tr>
+        <tr><td>Sectors covered</td><td>IT, Auto, Cement, Pharma, Electronic Goods, etc.</td><td>IT, Auto, Cement, Pharma, Electronic Goods, etc.</td></tr>
+        <tr><td>Headquarters</td><td>Dalal Street, Mumbai</td><td>Bandra Kurla Complex (BKC), Mumbai</td></tr>
+        <tr><td>Purpose of index</td><td>Reflects overall market sentiment. Economy doing well → Sensex rises.</td><td>Reflects overall market sentiment. Economy doing well → Nifty rises.</td></tr>
+      </table>
+      <h3 class="sub">Other Stock Exchanges in India</h3>
+      <div class="pill-row">
+        <div class="pill">Calcutta Stock Exchange (CSE)</div>
+        <div class="pill">Metropolitan Stock Exchange</div>
+        <div class="pill a">India International Exchange (India INX)</div>
+        <div class="pill g">MCX Stock Exchange (MCX-SX)</div>
+        <div class="pill am">United Stock Exchange (USE)</div>
+      </div>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>Derivatives market:</strong> 3 exchanges — BSE, NSE, MCX-SX<br>
+        <strong>Currency derivatives:</strong> 4 exchanges — BSE, NSE, MCX-SX, USE
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTICIPANTS -->
+  <div class="summary-content" id="sc-participants">
+    <div class="card">
+      <div class="tag green">Chapter 6 — Operation Side</div>
+      <h2>🏛️ Indian Stock Market Participants</h2>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>Indian Stock Exchanges</strong><br><span style="color:var(--muted)">Financial platforms for buying/selling shares. Primary ones: BSE and NSE. Others: CSE, MCX-SX, etc.</span></div>
+        <div class="mini-card"><strong>Merchant Bankers & Underwriters</strong><br><span style="color:var(--muted)">Merchant bankers assist companies in IPOs and financial transactions. Underwriters assume financial risk and guarantee minimum funds raised during IPO.</span></div>
+        <div class="mini-card"><strong>Regulators</strong><br><span style="color:var(--muted)">SEBI = primary regulator of securities markets. RBI may intervene selectively for monetary policy, banking regulations, or systemic stability.</span></div>
+        <div class="mini-card"><strong>Buyers and Sellers</strong><br><span style="color:var(--muted)">Retail and institutional investors who transact in the market.</span></div>
+        <div class="mini-card"><strong>Brokers</strong><br><span style="color:var(--muted)">Execute trades on behalf of buyers and sellers. Examples: Groww, Zerodha, Upstox. Open Demat and Trading accounts for clients.</span></div>
+        <div class="mini-card"><strong>Depositories (NSDL & CDSL)</strong><br><span style="color:var(--muted)">Hold securities in electronic form. NSDL = National Securities Depository Ltd. CDSL = Central Depository Services Ltd. Investors' Demat accounts are held here.</span></div>
+      </div>
+      <h3 class="sub">Demat Account vs Trading Account</h3>
+      <table class="compare-table">
+        <tr><th>Account</th><th>Purpose</th><th>Maintained by</th></tr>
+        <tr><td><strong>Demat Account</strong></td><td>Holds shares/securities in electronic/digital form. Eliminates physical share certificates.</td><td>Depository (NSDL/CDSL)</td></tr>
+        <tr><td><strong>Trading Account</strong></td><td>Used to buy/sell securities. Money for transactions is stored here. Cannot use savings account directly.</td><td>Broker</td></tr>
+      </table>
+      <div class="info-box amber">
+        <strong>Example (Ram):</strong> Ram wants to buy 10 Reliance shares at ₹20 each (total ₹200).<br>
+        1. Opens Trading Account + Demat Account via broker.<br>
+        2. Deposits ₹200 into Trading Account.<br>
+        3. Places buy order → ₹200 deducted from Trading Account.<br>
+        4. Shares transferred to and held in his Demat Account.
+      </div>
+      <h3 class="sub">Clearing Corporations</h3>
+      <p class="body-text">After trade is executed, buyer has payment obligation, seller has delivery obligation. Clearing = identifying what is owed. Settlement = settling obligations.</p>
+      <table class="compare-table">
+        <tr><th>Exchange</th><th>Clearing Corporation</th></tr>
+        <tr><td>NSE</td><td>NSCCL — National Securities Clearing Corporation Ltd.</td></tr>
+        <tr><td>BSE</td><td>ICCL — Indian Clearing Corporation Ltd.</td></tr>
+        <tr><td>Commodity related</td><td>Multi Commodity Exchange Clearing Corporation Ltd., National Commodity Clearing Ltd., AMC Repo Clearing Limited</td></tr>
+      </table>
+      <div class="info-box green">India has <strong>FIVE</strong> clearing corporations total (some related to commodity trade).</div>
+    </div>
+  </div>
+
+  <!-- INVESTOR TYPES -->
+  <div class="summary-content" id="sc-investors">
+    <div class="card">
+      <div class="tag pink">Chapter 7 — Misc Concepts</div>
+      <h2>👥 Types of Investors in IPO</h2>
+      <h3 class="sub">A. QIB — Qualified Institutional Buyers</h3>
+      <p class="body-text">Big investors perceived to have expertise and financial muscle to evaluate and invest in stock markets. <strong>IPO allocation: 50% of issue size.</strong></p>
+      <div class="info-box">QIBs include:<br>
+        • Public financial institutions (Section 4A, Companies Act 1956)<br>
+        • Scheduled commercial banks<br>
+        • Mutual funds and Alternate Investment Funds<br>
+        • Foreign Portfolio Investors registered with SEBI<br>
+        • Multilateral and bilateral development financial institutions<br>
+        • Venture capital funds registered with SEBI<br>
+        • Foreign Venture Capital Investors registered with SEBI<br>
+        • State Industrial Development Corporations<br>
+        • Insurance companies registered with IRDA<br>
+        • Provident Funds with minimum corpus of <strong>₹25 crores</strong><br>
+        • Pension Funds with minimum corpus of <strong>₹25 crores</strong><br>
+        • National Investment Fund set up by Government of India<br>
+        • Insurance funds set up by army, navy, air force, and Department of Posts<br>
+        • Systemically Important Non-Banking Financial Institutions
+      </div>
+      <h3 class="sub">Anchor Investors (Sub-category of QIB)</h3>
+      <div class="info-box purple">
+        • Concept introduced by SEBI on <strong>June 18, 2009</strong><br>
+        • Purpose: Enhance issuer's ability to sell issue, generate retail investor confidence, better price discovery<br>
+        • Subscribe to issue <strong>BEFORE</strong> its public opening<br>
+        • Pay <strong>25% upfront margin</strong>, remaining 75% within 2 days of closure<br>
+        • Lock-in periods: 30 days (50% portion) + 90 days (50% portion)<br>
+        • <strong>Min investment (updated): ₹5 crore</strong> (reduced from ₹10 crore)<br>
+        • <strong>Revised reservation:</strong> 40% of anchor portion reserved — 33.33% for Mutual Funds + 6.67% for Insurance Companies and Pension Funds. Unsubscribed 6.67% reallocated to Mutual Funds.<br>
+        • <strong>Revised cap on anchor investors:</strong> Up to 15 investors for first ₹250 crore + 10 additional investors per subsequent ₹250 crore.
+      </div>
+      <h3 class="sub">B. Retail Individual Investors (RII)</h3>
+      <p class="body-text">Individual investors who invest smaller amounts for personal investment. <strong>IPO allocation: 35% of issue size.</strong></p>
+      <div class="info-box green">
+        • Invest <strong>less than ₹2 lakhs</strong> to qualify as retail investor.<br>
+        • Investing ₹2 lakhs or more → classified as NII/HNI, not retail.<br>
+        • Retail investors can invest only at the <strong>cut-off price</strong> (price decided by issuing company).
+      </div>
+      <h3 class="sub">C. NII — Non-Institutional Investors (HNI / Corporate Bodies)</h3>
+      <div class="info-box amber">
+        • Invest <strong>more than ₹2 lakhs</strong> in IPO.<br>
+        • IPO allocation: <strong>15% of issue size.</strong><br>
+        • Sit between QIBs and Retail investors.
+      </div>
+      <div class="info-box" style="margin-top:10px;"><strong>Example allocation:</strong> If Reliance IPO size = ₹50 crores:<br>
+        QIBs: 50% = ₹25 crore | Retail: 35% = ₹17.5 crore | NII/HNI: 15% = ₹7.5 crore</div>
+      <h3 class="sub">Other Investor Types (Broader Classification)</h3>
+      <table class="compare-table">
+        <tr><th></th><th>Retail Investors</th><th>Institutional Investors</th></tr>
+        <tr><td>Who</td><td>Individual investors</td><td>Mutual funds, pension funds, insurance companies</td></tr>
+        <tr><td>Amount</td><td>Smaller amounts</td><td>Substantial amounts</td></tr>
+        <tr><td>Expertise</td><td>General public</td><td>Professional fund managers, extensive research</td></tr>
+        <tr><td>Market impact</td><td>Limited</td><td>Significant — move markets</td></tr>
+      </table>
+      <h3 class="sub">Trader vs Investor</h3>
+      <table class="compare-table">
+        <tr><th></th><th>Trader</th><th>Investor</th></tr>
+        <tr><td>Goal</td><td>Short-term profits from price fluctuations</td><td>Long-term capital appreciation or income (dividends/interest)</td></tr>
+        <tr><td>Holding period</td><td>Short (days/weeks)</td><td>Long (years)</td></tr>
+        <tr><td>Activity</td><td>Actively buys and sells frequently</td><td>Buys and holds</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ASBA & REGULATION -->
+  <div class="summary-content" id="sc-asba">
+    <div class="card">
+      <div class="tag amber">Chapter 7 — ASBA & Regulation</div>
+      <h2>🔒 ASBA & IPO Regulations</h2>
+      <h3 class="sub">ASBA — Application Supported by Blocked Amount</h3>
+      <div class="info-box green">
+        Process to apply for IPOs. Investor's money stays in their bank but is <strong>temporarily blocked</strong>.<br>
+        → Shares allotted: blocked amount debited.<br>
+        → Less shares allotted (oversubscription): only allotted amount debited, rest unblocked.<br>
+        <strong>Introduced:</strong> 2008 by SEBI | <strong>Mandatory for retail investors:</strong> 2016<br>
+        <strong>Banks offering ASBA:</strong> SCSB = Self-Certified Syndicated Banks<br>
+        <strong>UPI added as payment mode:</strong> 2018 (speeds up listing from 6 days → 3 days after issue closure)<br>
+        UPI = Instant payment system by NPCI (National Payments Corporation of India)
+      </div>
+      <div class="info-box amber"><strong>Pro-rata Allotment:</strong> In oversubscription, shares allotted proportionately to each investor based on their subscription amount relative to total demand. Example: Wanted 50 shares but only 30 allotted → refund for 20 shares (under old system, now ASBA handles this).</div>
+      <h3 class="sub">SEBI Regulations on IPOs</h3>
+      <table class="compare-table">
+        <tr><th>Rule</th><th>Details</th></tr>
+        <tr><td>Period of Subscription — Fixed Price</td><td>Minimum 3 working days, Maximum 10 working days</td></tr>
+        <tr><td>Period of Subscription — Book Built</td><td>3 to 7 days; extendable by 3 days if price band revised. Investors can revise bids in this period.</td></tr>
+        <tr><td>Min Application Amount</td><td>At least 25% of the issue price of the security</td></tr>
+        <tr><td>Discount to Retail Investors</td><td>Maximum 10% discount may be given to retail individual investors under net offer to public</td></tr>
+        <tr><td>Underwriting / Min Subscription</td><td>Minimum 90% of net offer must be subscribed; else company refunds entire amount</td></tr>
+        <tr><td>Refund timeline</td><td>If &lt;90% subscription OR company can't list → refund within 4 days from closure. Late refund: 15% interest p.a.</td></tr>
+        <tr><td>Commission — Shares</td><td>Maximum 5% commission to any person for subscription to shares</td></tr>
+        <tr><td>Commission — Debentures</td><td>Maximum 2.5% commission for debentures</td></tr>
+        <tr><td>Dematerialisation</td><td>All companies making public issues MUST enter agreement with ALL depositories to dematerialize shares</td></tr>
+        <tr><td>Credit Rating (IPO Grading)</td><td>Companies may get IPO graded by a SEBI-registered credit rating agency. Based on industry prospects, competitive strength, and business risks.</td></tr>
+      </table>
+      <h3 class="sub">Contents of Prospectus (SEBI/Companies Act mandated)</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>Details of Issue</strong><br><span style="color:var(--muted)">Company info, promoters, board of directors, key employees, industry and business overview</span></div>
+        <div class="mini-card"><strong>Objective of Issue</strong><br><span style="color:var(--muted)">Why is the public issue being made — intended use of funds</span></div>
+        <div class="mini-card"><strong>Issue Details</strong><br><span style="color:var(--muted)">Opening/closing dates, lead manager info, bankers to the issue, listing details</span></div>
+        <div class="mini-card"><strong>Terms of Issue</strong><br><span style="color:var(--muted)">Shares offered, method of offering, application procedure, bidding details (book built), allotment and refund procedures</span></div>
+        <div class="mini-card"><strong>Financial Info</strong><br><span style="color:var(--muted)">Financial statements, capital structure, accounting policies</span></div>
+        <div class="mini-card"><strong>Regulatory Disclosures</strong><br><span style="color:var(--muted)">All information of interest to shareholders, statutory disclosures</span></div>
+        <div class="mini-card"><strong>Risk Factors</strong><br><span style="color:var(--muted)">Company-specific risks, industry risks, and generic risks specific to the type of issue</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BULK & BLOCK TRADES -->
+  <div class="summary-content" id="sc-trades">
+    <div class="card">
+      <div class="tag purple">Chapter 7 — Special Trades</div>
+      <h2>💼 Bulk Deals & Block Deals</h2>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Bulk Deal</th><th>Block Deal</th></tr>
+        <tr><td>Focus</td><td><strong>Quantity</strong> of shares</td><td><strong>Value</strong> of transaction</td></tr>
+        <tr><td>Threshold</td><td>Total quantity &gt; <strong>0.5%</strong> of listed equity shares of the company</td><td>Minimum transaction value of <strong>₹25 crores</strong></td></tr>
+        <tr><td>Trading windows</td><td>Any time during market hours</td><td>Two specific windows only:<br>• Window 1: <strong>8:45 AM – 9:00 AM</strong><br>• Window 2: <strong>2:05 PM – 2:20 PM</strong></td></tr>
+        <tr><td>Price restriction</td><td>—</td><td>Price must NOT exceed <strong>±1%</strong> from ruling market price / previous day's closing price</td></tr>
+      </table>
+      <div class="info-box amber">💡 <strong>Simple rule:</strong> Bulk = about QUANTITY. Block = about VALUE (₹25 crore minimum).</div>
+    </div>
+  </div>
+
+  <!-- DEPOSITORY RECEIPTS -->
+  <div class="summary-content" id="sc-dr">
+    <div class="card">
+      <div class="tag pink">Chapter 7 — Global Finance</div>
+      <h2>🌍 Depository Receipts (DRs)</h2>
+      <div class="info-box red"><strong>Problem:</strong> Dual listing is NOT allowed in India. Reliance's shares listed on NSE/BSE CANNOT be directly listed on foreign stock exchanges.</div>
+      <div class="info-box green"><strong>Solution:</strong> Depository Receipts (DRs) — financial instruments that REPRESENT shares of a local company but are listed and traded on a stock exchange OUTSIDE the country. DRs are issued in foreign currency.</div>
+      <h3 class="sub">Types of Depository Receipts</h3>
+      <table class="compare-table">
+        <tr><th>Type</th><th>Full Name</th><th>Where Traded</th><th>Currency</th></tr>
+        <tr><td><strong>ADR</strong></td><td>American Depository Receipt</td><td>US financial markets ONLY (NYSE, NASDAQ)</td><td>US Dollars</td></tr>
+        <tr><td><strong>GDR</strong></td><td>Global Depository Receipt</td><td>All international exchanges EXCEPT USA</td><td>Foreign currency of that country</td></tr>
+        <tr><td><strong>IDR</strong></td><td>Indian Depository Receipt</td><td>Indian markets (for FOREIGN companies to raise capital in India)</td><td>Indian Rupees</td></tr>
+      </table>
+      <h3 class="sub">Process of Issuing ADRs (Same process for GDR, IDR)</h3>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="num">1</div><div class="content"><h4>Sign Agreement with Foreign Bank</h4><p>e.g., Reliance signs an agreement with Bank of America (BoA) to issue ADRs on NYSE.</p></div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="num">2</div><div class="content"><h4>Local Subsidiary (Custodian Bank) Buys Shares</h4><p>BoA's Indian subsidiary (the custodian bank) buys Reliance shares from Indian markets. e.g., buys 10 lakh shares.</p></div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="num">3</div><div class="content"><h4>ADRs Issued on NYSE (Conversion Ratio)</h4><p>Bank of America issues ADRs on the New York Stock Exchange based on an agreed ratio.<br>e.g., 1 ADR = 10 Reliance shares → 10 lakh shares = <strong>1 lakh ADRs</strong> issued on NYSE.</p></div></div>
+      </div>
+      <div class="info-box amber" style="margin-top:12px;">
+        📌 <strong>Key Points:</strong><br>
+        • Custodian bank = local subsidiary of foreign bank operating in India<br>
+        • DR holders receive <strong>dividends ONLY</strong> — NO voting rights<br>
+        • Conversion ratio is decided between the companies<br>
+        • 1 ADR does NOT necessarily equal 1 share — depends on agreed ratio
+      </div>
+    </div>
+  </div>
+
+  <!-- FDI, FPI, P-NOTES -->
+  <div class="summary-content" id="sc-fdi">
+    <div class="card">
+      <div class="tag green">Chapter 7 — Foreign Investment</div>
+      <h2>💱 FDI, FPI & Participatory Notes</h2>
+      <h3 class="sub">FDI vs FPI</h3>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>FDI (Foreign Direct Investment)</th><th>FPI (Foreign Portfolio Investment)</th></tr>
+        <tr><td>Nature</td><td>Investment in business interests or physical assets in another country</td><td>Investment in financial assets (stocks, bonds) in a country's financial markets</td></tr>
+        <tr><td>Control</td><td>Acquires management/operational control</td><td>No management control</td></tr>
+        <tr><td>Stability</td><td>Long-term, stable</td><td>Short-term, can be volatile ("hot money")</td></tr>
+        <tr><td>Form</td><td>Factories, land, physical operations</td><td>Securities — stocks, bonds</td></tr>
+      </table>
+      <h3 class="sub">Downstream Investment (Indirect FDI)</h3>
+      <div class="info-box">
+        <strong>Direct FDI:</strong> Mr. Anchit (USA) directly invests in EduTap (India) → this is FDI.<br><br>
+        <strong>Downstream Investment (Indirect FDI):</strong> Mr. Anchit invests in XYZ Company (registered in India). XYZ then invests that money in EduTap.<br>
+        → The investment reaches EduTap through an Indian intermediary = Downstream/Indirect FDI.
+      </div>
+      <h3 class="sub">Participatory Notes (P-Notes / PNs)</h3>
+      <div class="info-box amber">
+        <strong>Who needs P-Notes:</strong> People living OUTSIDE India who are neither NRIs nor Persons of Indian Origin — they CANNOT invest directly in Indian markets.<br><br>
+        <strong>How it works:</strong><br>
+        1. Such persons must invest through an FPI (Foreign Portfolio Investor) registered with SEBI.<br>
+        2. FPI takes their money, invests in Indian markets, and issues P-Notes to them.<br>
+        3. Value of P-Notes is derived from the underlying Indian shares bought by FPI.<br>
+        → P-Notes act like <strong>derivatives</strong> on Indian shares.<br><br>
+        <strong>Cannot be issued to:</strong> Indian Nationals, Persons of Indian Origin (PIOs), NRIs — to prevent money laundering routes.
+      </div>
+    </div>
+  </div>
+
+  <!-- MISC 2 -->
+  <div class="summary-content" id="sc-misc2">
+    <div class="card">
+      <div class="tag amber">Chapter 7 — Miscellaneous</div>
+      <h2>🔧 Green Shoe, Demutualization & Delisting</h2>
+      <h3 class="sub">Green Shoe Option (GSO)</h3>
+      <div class="info-box green">
+        Used to provide <strong>price stability</strong> in secondary market immediately after listing.<br>
+        • Company can allot <strong>additional shares up to 15% of issue size</strong> to public subscribers.<br>
+        • Proceeds from this extra allotment kept in a <strong>separate bank account</strong>.<br>
+        • If price falls BELOW issue price after listing → proceeds used to BUY shares from secondary market → supports price.<br>
+        • Price stabilization period: <strong>30 days from listing date.</strong><br>
+        • Stabilization activity done by an appointed entity — usually the <strong>lead manager (merchant banker)</strong>.
+      </div>
+      <h3 class="sub">Demutualization of Stock Exchanges</h3>
+      <div class="info-box">
+        Process by which a <strong>member-owned</strong> stock exchange becomes a <strong>shareholder-owned</strong> stock exchange.<br>
+        • Ownership changes from a few rich members (brokers, traders) → broader ownership by institutional investors, private investors, and the public.<br>
+        • Applicable ONLY to stock exchanges.
+      </div>
+      <h3 class="sub">Delisting of Securities</h3>
+      <p class="body-text">De-listing = stocks no longer listed on the stock exchange. Two types:</p>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Compulsory Delisting</th><th>Voluntary Delisting</th></tr>
+        <tr><td>Initiated by</td><td>Stock Exchange</td><td>Company itself</td></tr>
+        <tr><td>Reasons</td><td>Non-compliance with listing agreement for min 6 months; failure to maintain min trading level; insider trading; price manipulation; unfair market practices by promoters/directors</td><td>Company's own decision to delist</td></tr>
+        <tr><td>Price mechanism</td><td>Promoter must pay FAIR VALUE of securities and acquire them from shareholders</td><td><strong>Reverse Book Building method</strong> to arrive at exit price</td></tr>
+        <tr><td>Exit route</td><td>If promoter doesn't compensate: shares traded under "permitted category" for 1 year after delisting</td><td>Shareholders given exit opportunity by promoters/management. If public shareholding ≤10% of voting capital, acquirer can buy outstanding shares from remaining shareholders.</td></tr>
+        <tr><td>Shareholder approval</td><td>Not required</td><td>Special resolution at General Meeting required</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SOCIAL STOCK EXCHANGE -->
+  <div class="summary-content" id="sc-sse">
+    <div class="card">
+      <div class="tag green">Chapter 7 — Social Stock Exchange</div>
+      <h2>🌱 Social Stock Exchange (SSE)</h2>
+      <div class="info-box green">Special segment of the stock market <strong>regulated by SEBI</strong>, where social organizations (charities, non-profits, for-profit social enterprises) can raise funds for projects that help society. Operates under <strong>BSE SSE</strong> and <strong>NSE SSE</strong>.</div>
+      <div class="info-box amber">Organizations must demonstrate <strong>social intent</strong>. To qualify, an NPO or FPE must have at least <strong>67% of revenue, expenditure, or beneficiaries</strong> linked to one or more of SEBI's 16 social activity areas.</div>
+      <h3 class="sub">SEBI's 16 Social Activity Areas</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>1.</strong> Eradicating hunger, poverty, malnutrition, inequality</div>
+        <div class="mini-card"><strong>2.</strong> Promoting health care, sanitation, safe drinking water</div>
+        <div class="mini-card"><strong>3.</strong> Promoting education, employability, livelihoods</div>
+        <div class="mini-card"><strong>4.</strong> Gender equality, empowering women & LGBTQIA+ groups</div>
+        <div class="mini-card"><strong>5.</strong> Environmental sustainability, climate change, wildlife conservation</div>
+        <div class="mini-card"><strong>6.</strong> Protecting national heritage, art, culture</div>
+        <div class="mini-card"><strong>7.</strong> Training for rural, national, Paralympic & Olympic sports</div>
+        <div class="mini-card"><strong>8.</strong> Supporting social enterprise incubators</div>
+        <div class="mini-card"><strong>9.</strong> Strengthening non-profit ecosystem (fundraising, capacity building)</div>
+        <div class="mini-card"><strong>10.</strong> Livelihoods for poor, small farmers, non-farm workers</div>
+        <div class="mini-card"><strong>11.</strong> Slum development, affordable housing, sustainable cities</div>
+        <div class="mini-card"><strong>12.</strong> Disaster relief, rehabilitation, reconstruction</div>
+        <div class="mini-card"><strong>13.</strong> Promoting financial inclusion</div>
+        <div class="mini-card"><strong>14.</strong> Access to land/property for disadvantaged groups</div>
+        <div class="mini-card"><strong>15.</strong> Bridging digital divide, fighting misinformation, data protection</div>
+        <div class="mini-card"><strong>16.</strong> Welfare of migrants and displaced persons</div>
+      </div>
+      <h3 class="sub">Types of Social Enterprises Eligible for SSE</h3>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>NPO (Non-Profit Organization)</th><th>FPE (For-Profit Social Enterprise)</th></tr>
+        <tr><td>Nature</td><td>Charitable/developmental — education, health, environment</td><td>Business with social mission + profit motive (green tech, affordable healthcare)</td></tr>
+        <tr><td>SSE Registration</td><td><strong>Mandatory</strong> for fundraising on platform</td><td><strong>Voluntary</strong></td></tr>
+        <tr><td>Can list</td><td>ZCZP (Zero Coupon Zero Principal) Bonds + SIF units</td><td>Equity, debt securities on Main Board, SME, IGP platforms + SIF units</td></tr>
+        <tr><td>Compliance</td><td>Minimal annual compliance</td><td>Standard compliance</td></tr>
+      </table>
+      <h3 class="sub">Instruments on SSE</h3>
+      <div class="mini-grid">
+        <div class="mini-card"><strong>ZCZP Bonds (Zero Coupon Zero Principal)</strong><br><span style="color:var(--muted)">NPOs raise money — donors contribute expecting NO returns. No interest (zero coupon), no principal repaid. Pure donation structured as a bond. NPOs CANNOT raise via equity or traditional debt.</span></div>
+        <div class="mini-card"><strong>SIF — Social Impact Fund</strong><br><span style="color:var(--muted)">Alternative to public issuance of ZCZP bonds. Issues social units as securities.<br>• Min corpus: <strong>₹5 crores</strong><br>• Min investment: <strong>₹2 lakhs</strong><br>• Min grant accepted: <strong>₹10 lakhs</strong></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ FLASHCARDS ═══════════════ -->
+<div id="flashcards" class="section">
+  <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;">🃏 Flashcards — All Concepts</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:14px;">Tap the card to reveal the answer. Filter by topic below.</p>
+  <div class="fc-cats" id="fc-cats">
+    <button class="s-btn active" onclick="filterCards('all',this)">All (<span id="cnt-all"></span>)</button>
+    <button class="s-btn" onclick="filterCards('basics',this)">Basics</button>
+    <button class="s-btn" onclick="filterCards('shares',this)">Shares</button>
+    <button class="s-btn" onclick="filterCards('ipo',this)">IPO/FPO</button>
+    <button class="s-btn" onclick="filterCards('market',this)">Market/Exchanges</button>
+    <button class="s-btn" onclick="filterCards('investors',this)">Investors</button>
+    <button class="s-btn" onclick="filterCards('dr',this)">DRs & FDI</button>
+    <button class="s-btn" onclick="filterCards('numbers',this)">Key Numbers</button>
+    <button class="s-btn" onclick="filterCards('laws',this)">Laws & Acts</button>
+    <button class="s-btn" onclick="filterCards('misc',this)">Misc</button>
+  </div>
+  <div class="fc-progress">
+    <span id="fc-counter">1/1</span>
+    <div class="fc-bar"><div class="fc-bar-fill" id="fc-bar-fill" style="width:5%"></div></div>
+    <span id="fc-pct">5%</span>
+  </div>
+  <div style="perspective:1200px;">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="fc-face fc-front">
+        <div class="emoji" id="fc-emoji">💡</div>
+        <div class="question" id="fc-q">Loading...</div>
+        <div class="hint">Tap to reveal answer</div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="answer" id="fc-a">Answer here</div>
+      </div>
+    </div>
+  </div>
+  <div class="fc-controls">
+    <button class="fc-btn prev" onclick="prevCard()">← Prev</button>
+    <button class="fc-btn flip" onclick="flipCard()">Flip Card</button>
+    <button class="fc-btn next" onclick="nextCard()">Next →</button>
+  </div>
+</div>
+
+<!-- ═══════════════ QUIZ ═══════════════ -->
+<div id="quiz" class="section">
+  <div class="quiz-header">
+    <h2 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;">🧠 Quiz — 30 Questions</h2>
+    <div class="quiz-score">Score: <span id="score-display">0</span> / <span id="total-display">0</span></div>
+  </div>
+  <div id="q-display">
+    <div class="q-card">
+      <div class="q-num" id="q-num">Question 1 of 30</div>
+      <div class="q-text" id="q-text">Loading...</div>
+      <div class="options" id="q-options"></div>
+      <div class="explanation" id="q-explanation"></div>
+      <button class="q-next" id="q-next" onclick="nextQuestion()">Next Question →</button>
+    </div>
+  </div>
+  <div id="quiz-result-area" style="display:none;">
+    <div class="quiz-result">
+      <div class="big-score" id="final-score">0%</div>
+      <h3 id="result-msg">Result</h3>
+      <p id="result-sub">Keep practicing!</p>
+      <button class="restart-btn" onclick="restartQuiz()">🔄 Try Again</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CHEATSHEET ═══════════════ -->
+<div id="cheatsheet" class="section">
+  <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:16px;">⚡ Complete Cheatsheet</h2>
+  <h3 style="font-family:'Syne',sans-serif;color:var(--accent3);margin-bottom:10px;">📊 All Key Numbers</h3>
+  <div class="numbers-grid">
+    <div class="num-card"><div class="big-num">50%</div><div class="label">IPO reserved for QIBs</div></div>
+    <div class="num-card"><div class="big-num">35%</div><div class="label">IPO reserved for Retail (RII)</div></div>
+    <div class="num-card"><div class="big-num">15%</div><div class="label">IPO reserved for NII/HNI</div></div>
+    <div class="num-card"><div class="big-num">90%</div><div class="label">Min IPO subscription (SEBI)</div></div>
+    <div class="num-card"><div class="big-num">₹2L</div><div class="label">Max to qualify as Retail Investor</div></div>
+    <div class="num-card"><div class="big-num">20%</div><div class="label">Max band gap in Book Building</div></div>
+    <div class="num-card"><div class="big-num">25%</div><div class="label">Min application amount (% of issue price)</div></div>
+    <div class="num-card"><div class="big-num">10%</div><div class="label">Max discount to retail investors</div></div>
+    <div class="num-card"><div class="big-num">200</div><div class="label">Max investors in Private Placement</div></div>
+    <div class="num-card"><div class="big-num">15%</div><div class="label">Max Green Shoe Option allotment</div></div>
+    <div class="num-card"><div class="big-num">30</div><div class="label">Green Shoe stabilization days</div></div>
+    <div class="num-card"><div class="big-num">20yr</div><div class="label">Max life of preference shares</div></div>
+    <div class="num-card"><div class="big-num">30yr</div><div class="label">Max for infra co. pref. shares</div></div>
+    <div class="num-card"><div class="big-num">4days</div><div class="label">Refund deadline if &lt;90% subscribed</div></div>
+    <div class="num-card"><div class="big-num">15%</div><div class="label">Interest on late IPO refund (p.a.)</div></div>
+    <div class="num-card"><div class="big-num">5%</div><div class="label">Max commission for share subscription</div></div>
+    <div class="num-card"><div class="big-num">2.5%</div><div class="label">Max commission for debentures</div></div>
+    <div class="num-card"><div class="big-num">₹5Cr</div><div class="label">Min Anchor Investor investment</div></div>
+    <div class="num-card"><div class="big-num">25%</div><div class="label">Anchor Investor upfront margin</div></div>
+    <div class="num-card"><div class="big-num">30days</div><div class="label">Anchor lock-in (50% portion)</div></div>
+    <div class="num-card"><div class="big-num">90days</div><div class="label">Anchor lock-in (50% portion)</div></div>
+    <div class="num-card"><div class="big-num">₹25Cr</div><div class="label">Min Block Deal value</div></div>
+    <div class="num-card"><div class="big-num">0.5%</div><div class="label">Bulk Deal quantity threshold</div></div>
+    <div class="num-card"><div class="big-num">±1%</div><div class="label">Block Deal price restriction</div></div>
+    <div class="num-card"><div class="big-num">30</div><div class="label">SENSEX stocks (BSE)</div></div>
+    <div class="num-card"><div class="big-num">50</div><div class="label">NIFTY stocks (NSE)</div></div>
+    <div class="num-card"><div class="big-num">1875</div><div class="label">BSE founded</div></div>
+    <div class="num-card"><div class="big-num">1992</div><div class="label">NSE founded</div></div>
+    <div class="num-card"><div class="big-num">1986</div><div class="label">SENSEX launched (Jan 1)</div></div>
+    <div class="num-card"><div class="big-num">₹25Cr</div><div class="label">Min corpus — QIB Provident/Pension Funds</div></div>
+    <div class="num-card"><div class="big-num">₹5Cr</div><div class="label">SIF minimum corpus (SSE)</div></div>
+    <div class="num-card"><div class="big-num">₹2L</div><div class="label">SIF minimum investment</div></div>
+    <div class="num-card"><div class="big-num">₹10L</div><div class="label">SIF minimum grant accepted</div></div>
+    <div class="num-card"><div class="big-num">67%</div><div class="label">Min social activity % for SSE eligibility</div></div>
+    <div class="num-card"><div class="big-num">16</div><div class="label">SEBI social activity areas (SSE)</div></div>
+    <div class="num-card"><div class="big-num">2009</div><div class="label">Anchor Investor concept introduced (Jun 18)</div></div>
+    <div class="num-card"><div class="big-num">2008</div><div class="label">ASBA introduced</div></div>
+    <div class="num-card"><div class="big-num">2016</div><div class="label">ASBA mandatory for retail investors</div></div>
+    <div class="num-card"><div class="big-num">2018</div><div class="label">UPI added to ASBA</div></div>
+    <div class="num-card"><div class="big-num">6→3</div><div class="label">Days to listing (after UPI in ASBA)</div></div>
+  </div>
+
+  <h3 style="font-family:'Syne',sans-serif;color:var(--accent3);margin:24px 0 10px;">📋 Quick Reference Cards</h3>
+  <div class="cheat-grid">
+    <div class="cheat-card">
+      <h3>📄 Prospectus Types</h3>
+      <ul>
+        <li><strong>Red Herring Prospectus</strong> — Full details, no final price. For IPO.</li>
+        <li><strong>Abridged Prospectus</strong> — Summary of Red Herring. For IPO.</li>
+        <li><strong>Letter of Offer</strong> — ONLY for Rights Issue. NOT for IPO.</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>🌍 Depository Receipts</h3>
+      <ul>
+        <li><strong>ADR</strong> — US markets only, USD</li>
+        <li><strong>GDR</strong> — All international EXCEPT USA</li>
+        <li><strong>IDR</strong> — Foreign companies in India</li>
+        <li>DR holders: Dividends only, NO voting rights</li>
+        <li>Custodian = local subsidiary of foreign bank</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>🏦 Depositories & Clearing</h3>
+      <ul>
+        <li><strong>NSDL</strong> — National Securities Depository Ltd</li>
+        <li><strong>CDSL</strong> — Central Depository Services Ltd</li>
+        <li><strong>NSCCL</strong> — Clearing corp for NSE</li>
+        <li><strong>ICCL</strong> — Clearing corp for BSE</li>
+        <li>India has 5 clearing corporations total</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>⚖️ Equity vs Preference</h3>
+      <ul>
+        <li>Preference: Fixed dividend, paid first, 1st on liquidation</li>
+        <li>Equity: Variable dividend, paid after, 2nd on liquidation</li>
+        <li>Voting rights: Equity ONLY</li>
+        <li>Management: Equity ONLY</li>
+        <li>Real owners: Equity shareholders</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>🎁 Primary Market Offerings</h3>
+      <ul>
+        <li><strong>Bonus</strong> — Free shares to existing SHs, no money to co.</li>
+        <li><strong>Rights</strong> — Existing SHs buy at discount, money to co.</li>
+        <li><strong>Private Placement</strong> — Max 200 specific investors</li>
+        <li><strong>ESOP</strong> — Shares to employees (internal SHs)</li>
+        <li><strong>Fresh Issue</strong> — New shares, money to company</li>
+        <li><strong>OFS</strong> — Existing shares sold, money to seller</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>📅 IPO Subscription Periods</h3>
+      <ul>
+        <li>Fixed price: 3–10 working days</li>
+        <li>Book built: 3–7 days (+3 if band revised)</li>
+        <li>Min application: 25% of issue price</li>
+        <li>Min subscription: 90% of net offer</li>
+        <li>Refund if &lt;90%: within 4 days</li>
+        <li>Late refund penalty: 15% interest p.a.</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>📊 BSE vs NSE</h3>
+      <ul>
+        <li>BSE: 1875, Dalal Street, SENSEX, 30 stocks</li>
+        <li>NSE: 1992, BKC Mumbai, NIFTY, 50 stocks</li>
+        <li>SENSEX launched: Jan 1, 1986</li>
+        <li>BSE = first SEBI recognised exchange</li>
+        <li>Both HQs in Mumbai</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>💱 FDI vs FPI</h3>
+      <ul>
+        <li>FDI: Direct investment, management control, long-term</li>
+        <li>FPI: Financial securities, no control, short-term</li>
+        <li>Downstream FDI: via Indian intermediary company</li>
+        <li>P-Notes: For foreigners not NRI/PIO investing via FPI</li>
+        <li>P-Notes NOT issued to Indians/NRIs/PIOs</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>⭐ Preference Share Types</h3>
+      <ul>
+        <li>Convertible / Non-Convertible</li>
+        <li>Redeemable (has maturity) / Irredeemable</li>
+        <li>Participating (share extra profits) / Non-Participating</li>
+        <li>Cumulative (carry forward dividends) / Non-Cumulative</li>
+        <li>Max life: 20 yrs (30 yrs infra) — Sec 55 CA 2013</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>🔒 Block Deal Windows</h3>
+      <ul>
+        <li>Window 1: 8:45 AM – 9:00 AM</li>
+        <li>Window 2: 2:05 PM – 2:20 PM</li>
+        <li>Price: within ±1% of market/prev day closing</li>
+        <li>Min value: ₹25 crores</li>
+        <li>Bulk deal: &gt;0.5% of listed shares (qty focus)</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>🏛️ Governing Laws</h3>
+      <ul>
+        <li>SEBI Act 1992 — Statutory powers to SEBI</li>
+        <li>SC(R)A 1956 — Stock exchange regulation</li>
+        <li>Depositories Act 1996 — Dematerialisation</li>
+        <li>PMLA 2002 — Money laundering prevention</li>
+        <li>IOSCO — Global securities regulator body</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>🌱 Social Stock Exchange</h3>
+      <ul>
+        <li>BSE SSE & NSE SSE platforms</li>
+        <li>NPO: mandatory registration, ZCZP bonds</li>
+        <li>FPE: voluntary, equity/debt on main board</li>
+        <li>67% revenue/expenditure in 16 social areas</li>
+        <li>ZCZP = zero coupon, zero principal (pure donation)</li>
+        <li>SIF corpus ₹5Cr, min invest ₹2L, min grant ₹10L</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── NAVIGATION ──
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  if(id==='flashcards') renderCard();
+  if(id==='quiz') { quizStarted=false; renderQuestion(); }
+}
+function goToSummary(topic) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('summary').classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.nav-btn')[1].classList.add('active');
+  showSummary(topic, null);
+}
+function showSummary(id, btn) {
+  document.querySelectorAll('.summary-content').forEach(s=>s.classList.remove('active'));
+  const el = document.getElementById('sc-'+id);
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.summary-nav .s-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else {
+    document.querySelectorAll('.summary-nav .s-btn').forEach(b=>{
+      if(b.getAttribute('onclick') && b.getAttribute('onclick').includes("'"+id+"'")) b.classList.add('active');
+    });
+  }
+}
+
+// ── FLASHCARDS DATA ──
+const allCards = [
+  // BASICS
+  {cat:'basics',emoji:'🏢',q:'What is a Share?',a:'A unit of ownership in a company. Example: Ram buys 100 shares of Reliance = owns 100 units of Reliance. Each share = fractional ownership interest.'},
+  {cat:'basics',emoji:'💡',q:'What is Equity Capital?',a:'Funds raised by a company by offering a portion of its ownership in the form of shares to investors/general public.'},
+  {cat:'basics',emoji:'💰',q:'What is a Dividend?',a:'A return paid to equity shareholders from company profits. It is the company\'s reward to shareholders for financing its operations. Dividends are VARIABLE — not fixed.'},
+  {cat:'basics',emoji:'📉',q:'What is Dilution of Control?',a:'When a company issues more shares, existing shareholders\' ownership % decreases. Their decision-making authority is reduced.'},
+  {cat:'basics',emoji:'🗳️',q:'What are Voting Rights?',a:'"One share = one vote." More shares = more power. Only EQUITY shareholders get voting rights. Preference shareholders do NOT get voting rights.'},
+  {cat:'basics',emoji:'📊',q:'Share vs Stock vs Equity — What\'s the difference?',a:'<strong>Share</strong> = ownership in ONE specific company. <strong>Stock</strong> = portfolio of shares in MULTIPLE companies. <strong>Equity</strong> = concept of ownership via financial instruments.'},
+  {cat:'basics',emoji:'⏳',q:'Why is equity called "long-term money"?',a:'Equity shares have NO fixed maturity period. Returns typically come when company dissolves or liquidates. Companies run for extended periods, so this is long-term.'},
+  {cat:'basics',emoji:'👤',q:'Inside vs Outside Shareholders — What\'s the difference?',a:'<strong>Inside shareholders</strong> = executives, directors, employees — actively involved in company management. <strong>Outside shareholders</strong> = investors who own shares but don\'t participate in day-to-day management.'},
+  // SHARES
+  {cat:'shares',emoji:'💵',q:'What is Face Value of a share?',a:'The original/par value printed on the share certificate. Dividends are calculated ON face value. Example: FV = ₹10, dividend declared = 50% → dividend per share = ₹5.'},
+  {cat:'shares',emoji:'🏷️',q:'Issue Price vs Market Price — what\'s the difference?',a:'<strong>Issue Price</strong> = price at which company sells shares in PRIMARY market. <strong>Market Price</strong> = price shares trade at on NSE/BSE (SECONDARY market), determined by supply/demand and company performance.'},
+  {cat:'shares',emoji:'⭐',q:'What 2 preferences do Preference Shareholders get over Equity Shareholders?',a:'1. Priority in DIVIDEND payment (fixed dividend paid first). 2. Priority in repayment of capital during LIQUIDATION (get money back before equity shareholders).'},
+  {cat:'shares',emoji:'🔄',q:'What is a Convertible Preference Share?',a:'A preference share that can be converted into ordinary equity shares at agreed terms and conditions. Non-convertible = no such option.'},
+  {cat:'shares',emoji:'📅',q:'What is a Redeemable Preference Share?',a:'Has a specific maturity date on which the company repays the capital amount and stops dividend payments. Irredeemable = no maturity date.'},
+  {cat:'shares',emoji:'📈',q:'What is a Participating Preference Share?',a:'Shareholders can participate in EXTRA profits of the company apart from their fixed dividend. Non-Participating = only fixed dividend, no share in extra earnings/surplus assets.'},
+  {cat:'shares',emoji:'📋',q:'What is a Cumulative Preference Share?',a:'Entitled to receive ALL unpaid dividends from PAST periods + current dividends, even if company skipped payments due to insufficient profits in those years. Non-cumulative = can\'t carry forward unpaid dividends.'},
+  {cat:'shares',emoji:'🎁',q:'What is a Bonus Issue?',a:'Free additional shares given to existing shareholders. Alternative to cash dividends. No money collected. Issued proportionally. Example: 3:2 → 3 shares per 2 held. 1,000 shares → get 1,500 bonus shares.'},
+  {cat:'shares',emoji:'📋',q:'What is a Rights Issue?',a:'Existing shareholders get the RIGHT to buy new shares at a discounted price vs market price. Unlike bonus, payment IS required. Used for raising capital. Can be renounced (right sold to others).'},
+  {cat:'shares',emoji:'🏦',q:'What is a Private Placement?',a:'Company offers securities to max 200 specific, identified investors. NOT the general public. Fewer regulations, faster process. Payment only via banking channels (NOT cash). Per Companies Act 2013.'},
+  {cat:'shares',emoji:'👔',q:'What is ESOP?',a:'Employee Stock Option Plan. Shares issued specifically to employees of the company. ESOP recipients are called INTERNAL SHAREHOLDERS as they\'re involved in company operations.'},
+  {cat:'shares',emoji:'🔁',q:'Bonus Issue vs Rights Issue — Key difference?',a:'<strong>Bonus</strong>: FREE to existing shareholders, NO money to company. <strong>Rights</strong>: Existing shareholders pay discounted price, YES money to company. Company needs capital → Rights issue. Wants to reward without cash → Bonus issue.'},
+  // IPO/FPO
+  {cat:'ipo',emoji:'🚀',q:'What is an IPO?',a:'Initial Public Offering. A PRIVATE company offers shares to the PUBLIC for the FIRST TIME. Company goes from private to public. Listed on NSE/BSE. IPO is a primary market event.'},
+  {cat:'ipo',emoji:'🔁',q:'What is an FPO?',a:'Follow-on Public Offering. An ALREADY LISTED company issues additional shares to the public again. No need to re-register on exchange. Used when listed company needs more capital.'},
+  {cat:'ipo',emoji:'🏷️',q:'What is "Listing"?',a:'The process of a company getting registered on stock exchanges (NSE/BSE), which allows its shares to be traded on the open market. Happens when company does its IPO.'},
+  {cat:'ipo',emoji:'💸',q:'Fresh Issue vs Offer for Sale (OFS) — Key difference?',a:'<strong>Fresh Issue</strong>: New shares created → money goes to COMPANY. <strong>OFS</strong>: Existing shareholders (promoters) sell their shares → money goes to THEM, not company. Company is NOT financially involved in OFS.'},
+  {cat:'ipo',emoji:'🏦',q:'What does a Merchant Banker do in an IPO?',a:'Manages the full IPO process. Collects money from public → transfers to company. Acts as Lead Manager/Lead Bank/Banker to the Issue. Provides underwriting, pre-IPO and post-IPO support.'},
+  {cat:'ipo',emoji:'🛡️',q:'What is Underwriting?',a:'A guarantee by the underwriter that at least 90% of IPO will be subscribed. If short, underwriter buys the remaining shares themselves. Usually provided by the merchant banker itself.'},
+  {cat:'ipo',emoji:'📊',q:'What is Oversubscription vs Undersubscription?',a:'<strong>Oversubscription</strong>: Demand > shares available. Investors don\'t get full allocation. ASBA prevents money being blocked unnecessarily. <strong>Undersubscription</strong>: Demand < shares offered. Low investor interest.'},
+  {cat:'ipo',emoji:'📄',q:'What is the Red Herring Prospectus?',a:'Document submitted to regulators before IPO. Full company details — finances, operations, risks. LACKS final price and share numbers. Once approved, a final prospectus with specific details is issued.'},
+  {cat:'ipo',emoji:'📃',q:'What is an Abridged Prospectus?',a:'Shorter summary version of the Red Herring Prospectus. Contains all important details in concise form. Issued for IPOs.'},
+  {cat:'ipo',emoji:'✉️',q:'What is a Letter of Offer?',a:'Document issued ONLY during a Rights Issue. NOT used for IPO or FPO. Serves the same purpose as a prospectus but specifically for rights issues.'},
+  {cat:'ipo',emoji:'💹',q:'What is Fixed Price vs Book Building issue?',a:'<strong>Fixed Price</strong>: Company declares ONE set price (e.g., ₹100). <strong>Book Building</strong>: Company gives PRICE RANGE (e.g., ₹96–₹100). Investors bid. Most popular price = final price. Band gap ≤ 20% per SEBI.'},
+  {cat:'ipo',emoji:'📉',q:'What is Floor Price and Cap Price in Book Building?',a:'<strong>Floor Price (Lower Band)</strong> = Minimum price investors can bid. <strong>Cap Price (Higher Band)</strong> = Maximum price. Difference between them cannot exceed 20% (SEBI rule). Example: Floor ₹100 → Cap max ₹120.'},
+  // MARKET / EXCHANGES
+  {cat:'market',emoji:'🏦',q:'What is the Primary Market?',a:'Market where securities are issued for the VERY FIRST TIME. Company directly issues to investors. Company receives the money. Includes IPO, FPO, Rights Issue, Bonus Issue.'},
+  {cat:'market',emoji:'🔄',q:'What is the Secondary Market?',a:'Market where already-issued securities are bought/sold between investors. Company is NOT involved. Includes daily trading on NSE, BSE. Money flows between investors, not to company.'},
+  {cat:'market',emoji:'📈',q:'What is SENSEX and how many stocks?',a:'Sensitivity Index of BSE. Launched January 1, 1986. Comprises 30 stocks from different sectors. Reflects overall market sentiment. Economy doing well = Sensex rises.'},
+  {cat:'market',emoji:'📊',q:'What is NIFTY and how many stocks?',a:'National Fifty. Index of NSE. Comprises 50 stocks from different sectors. Reflects overall market sentiment. When economy does well → NIFTY rises.'},
+  {cat:'market',emoji:'🏛️',q:'BSE — When founded, where, and what\'s unique about it?',a:'Founded 1875 — OLDEST stock exchange in India. Located on Dalal Street, Mumbai. First stock exchange to get SEBI recognition. Index = SENSEX (30 stocks). Launched Jan 1, 1986.'},
+  {cat:'market',emoji:'🏢',q:'NSE — When founded and where?',a:'Founded 1992. Located in Bandra Kurla Complex (BKC), Mumbai. Index = NIFTY (National Fifty, 50 stocks). Two major indices reflect overall market sentiment.'},
+  {cat:'market',emoji:'💼',q:'What is a Demat Account?',a:'Dematerialized account. Electronic repository for holding securities (stocks, bonds, MFs) in digital form. Eliminates physical certificates. Held/maintained by Depository (NSDL/CDSL), opened via broker.'},
+  {cat:'market',emoji:'💳',q:'What is a Trading Account?',a:'Used to buy/sell securities. Money for transactions is stored here. Cannot use savings bank account directly for trading. Opened by a broker on your behalf.'},
+  {cat:'market',emoji:'🔄',q:'What is a Clearing Corporation? Name them.',a:'Settles trade obligations after execution. NSE: NSCCL. BSE: ICCL. Others: MCX Clearing Corp, National Commodity Clearing Ltd, AMC Repo Clearing Ltd. India has 5 clearing corporations total.'},
+  {cat:'market',emoji:'🏦',q:'What are NSDL and CDSL?',a:'India\'s two Depositories. NSDL = National Securities Depository Ltd. CDSL = Central Depository Services Ltd. They hold shares electronically in investors\' Demat accounts.'},
+  // INVESTORS
+  {cat:'investors',emoji:'👥',q:'What are QIBs and what % of IPO do they get?',a:'Qualified Institutional Buyers. Big investors with expertise and financial muscle. Get 50% of IPO issue size. Include banks, MFs, FPIs, insurance, pension funds, venture capital, etc.'},
+  {cat:'investors',emoji:'🏦',q:'What is the min corpus for Provident/Pension Funds to qualify as QIB?',a:'Minimum corpus of ₹25 crores each for both Provident Funds and Pension Funds to be classified as QIBs.'},
+  {cat:'investors',emoji:'⚓',q:'What is an Anchor Investor?',a:'Sub-category of QIB. Subscribes BEFORE the IPO opens publicly. Pay 25% upfront, 75% within 2 days of closure. Lock-in: 30 days (50% portion) + 90 days (50% portion). Min investment: ₹5 crore. Introduced June 18, 2009.'},
+  {cat:'investors',emoji:'🛒',q:'What is a Retail Investor? What % of IPO do they get?',a:'Individual investors investing LESS THAN ₹2 lakhs. Get 35% of IPO issue size. Can only invest at the CUT-OFF PRICE decided by the company. ₹2 lakh or more = classified as NII/HNI.'},
+  {cat:'investors',emoji:'💼',q:'What is a Non-Institutional Investor (NII/HNI)?',a:'High Net-Worth Individuals or corporate bodies investing MORE THAN ₹2 lakhs. Get 15% of IPO issue size. Sit between QIBs and Retail investors.'},
+  {cat:'investors',emoji:'🔒',q:'What is ASBA?',a:'Application Supported by Blocked Amount. Money stays in bank account but is BLOCKED until shares are allotted. If fewer shares allotted (oversubscription), only allotted amount debited. Introduced 2008, mandatory for retail 2016.'},
+  {cat:'investors',emoji:'🏧',q:'What are SCSBs?',a:'Self-Certified Syndicated Banks. Banks that offer the ASBA facility. The blocked amount under ASBA is maintained in accounts with these banks.'},
+  {cat:'investors',emoji:'📱',q:'What is Pro-Rata Allotment?',a:'In oversubscription, each investor is allotted shares proportionate to their subscription relative to total demand. Example: Asked for 50 shares, only 30 allotted → refund for 20 shares\' worth.'},
+  // DR & FDI
+  {cat:'dr',emoji:'🌍',q:'What is an ADR?',a:'American Depository Receipt. Represents shares of a FOREIGN company traded on US financial markets in USD. Allows US investors to invest in foreign companies without buying shares on foreign exchanges.'},
+  {cat:'dr',emoji:'🌐',q:'What is a GDR?',a:'Global Depository Receipt. Represents shares of a foreign company traded on international stock exchanges EXCEPT the USA. While ADR is US-only, GDR is for all other markets.'},
+  {cat:'dr',emoji:'🇮🇳',q:'What is an IDR?',a:'Indian Depository Receipt. Introduced in India to allow FOREIGN COMPANIES to raise capital in the Indian securities market. Like GDR/ADR but specifically for foreign companies in India.'},
+  {cat:'dr',emoji:'❌',q:'Why can\'t Indian companies directly list on foreign exchanges?',a:'Because DUAL LISTING is NOT allowed in India. A company\'s shares listed on NSE/BSE cannot be directly listed on foreign stock exchanges. Solution = convert shares into Depository Receipts (DRs).'},
+  {cat:'dr',emoji:'🏦',q:'What is a Custodian Bank in the DR process?',a:'The local subsidiary of the foreign bank operating in the company\'s home country. In the ADR process for Reliance: BoA\'s Indian subsidiary = custodian bank. It buys shares locally and holds them.'},
+  {cat:'dr',emoji:'💱',q:'What is FDI?',a:'Foreign Direct Investment. Investment made by an individual/entity/government of one country into business interests or physical assets in another country. Long-term, acquires management control.'},
+  {cat:'dr',emoji:'📈',q:'What is FPI?',a:'Foreign Portfolio Investment. Investment in financial assets (stocks, bonds) by foreign investors in a country\'s financial markets. Short-term, volatile, no management control.'},
+  {cat:'dr',emoji:'🔄',q:'What is Downstream Investment?',a:'Indirect FDI. Foreign investor invests in an Indian intermediary company, which then invests in the target Indian company. The investment reaches the target through an Indian entity (unlike direct FDI).'},
+  {cat:'dr',emoji:'📝',q:'What are P-Notes (Participatory Notes)?',a:'Issued by FPIs to foreigners (NOT NRIs/PIOs) who can\'t invest directly in India. FPI invests on their behalf and issues P-Notes. P-Note value derived from underlying Indian shares = acts like a derivative. NOT issued to Indians/NRIs/PIOs (anti-money laundering).'},
+  // KEY NUMBERS
+  {cat:'numbers',emoji:'📊',q:'IPO allocation: QIB, Retail, NII — what %?',a:'QIBs: 50% | Retail (RII): 35% | NII/HNI: 15%. Total = 100%.'},
+  {cat:'numbers',emoji:'💸',q:'What is the minimum subscription % required for an IPO?',a:'90% of the net offer MUST be subscribed. Below 90% = company must refund ALL subscription amounts within 4 days. Late refund = 15% interest per annum.'},
+  {cat:'numbers',emoji:'📅',q:'Book Building vs Fixed Price — subscription periods?',a:'Fixed Price: 3 to 10 working days. Book Building: 3 to 7 days (can extend by 3 days if price band is revised).'},
+  {cat:'numbers',emoji:'💰',q:'What is the Green Shoe Option limit and duration?',a:'Company can allot up to 15% EXTRA shares beyond IPO size. Price stabilization period = 30 DAYS from listing date. Lead manager usually handles it.'},
+  {cat:'numbers',emoji:'📋',q:'Section 55, Companies Act 2013 — what does it say about preference shares?',a:'Preference shares can be issued for a maximum of 20 YEARS from date of issue. For infrastructure companies: max 30 YEARS.'},
+  {cat:'numbers',emoji:'⚓',q:'Anchor Investor — all key numbers',a:'Introduced: June 18, 2009. Min investment: ₹5 crore. Upfront: 25%. Balance: within 2 days. Lock-in: 30 days (50% portion) + 90 days (50% portion). Up to 15 investors per first ₹250Cr + 10 per subsequent ₹250Cr.'},
+  {cat:'numbers',emoji:'📅',q:'ASBA key dates?',a:'Introduced: 2008 by SEBI. Mandatory for retail investors: 2016. UPI added as payment mode: 2018. Effect of UPI: Listing time reduced from 6 days to 3 days after issue closure.'},
+  {cat:'numbers',emoji:'💼',q:'Block Deal — key numbers?',a:'Min transaction value: ₹25 crore. Two windows: 8:45–9:00 AM and 2:05–2:20 PM. Price within ±1% of market/previous day closing price.'},
+  {cat:'numbers',emoji:'📊',q:'Bulk Deal — key threshold?',a:'Total quantity bought/sold must be MORE THAN 0.5% of the number of listed equity shares of the company.'},
+  {cat:'numbers',emoji:'🌱',q:'SSE (Social Stock Exchange) — key numbers?',a:'Min 67% activity in SEBI\'s 16 areas. SIF: corpus ₹5Cr, min invest ₹2L, min grant ₹10L. Operates on BSE SSE and NSE SSE.'},
+  {cat:'numbers',emoji:'💲',q:'IPO commission limits?',a:'Max 5% commission for subscription to SHARES. Max 2.5% commission for DEBENTURES.'},
+  // LAWS
+  {cat:'laws',emoji:'⚖️',q:'What does the SEBI Act 1992 do?',a:'Gave SEBI statutory powers for: (1) Protecting investor interests in securities, (2) Promoting development of securities market, (3) Regulating the securities market.'},
+  {cat:'laws',emoji:'📜',q:'What does the Securities Contracts (Regulation) Act 1956 do?',a:'Regulates securities trading and stock exchanges to prevent undesirable transactions. Grants Central Government regulatory jurisdiction over stock exchanges, contracts in securities, and listing of securities.'},
+  {cat:'laws',emoji:'🏛️',q:'What does the Depositories Act 1996 do?',a:'Facilitates establishment of securities depositories and promotes dematerialisation. Makes public company securities freely transferable. Enables electronic transfer of ownership. Eliminates need for physical transfer deeds.'},
+  {cat:'laws',emoji:'💸',q:'What does the Prevention of Money Laundering Act (PMLA) 2002 do?',a:'Prevents money laundering and provides for confiscation of property derived from money laundering. Defines money laundering as acquiring, owning, possessing, or transferring proceeds of crime.'},
+  {cat:'laws',emoji:'🌐',q:'What is IOSCO?',a:'International Organization of Securities Commissions. Global organization that sets standards for regulating securities markets — ensures fairness, transparency, investor protection worldwide. Promotes cooperation among securities regulators across countries.'},
+  // MISC
+  {cat:'misc',emoji:'👟',q:'What is the Green Shoe Option?',a:'Used to stabilize share price in secondary market after listing. Company allots up to 15% extra shares. Proceeds kept separately. If price falls below issue price → proceeds used to buy back shares. Duration: 30 days from listing. Managed by lead manager.'},
+  {cat:'misc',emoji:'🔄',q:'What is Demutualization of Stock Exchanges?',a:'Process where a MEMBER-OWNED (brokers/traders) stock exchange becomes a SHAREHOLDER-OWNED exchange. Ownership broadens to include institutional investors, private investors, public. Concept only for stock exchanges.'},
+  {cat:'misc',emoji:'❌',q:'Compulsory vs Voluntary Delisting — key differences?',a:'<strong>Compulsory</strong>: By Stock Exchange, for non-compliance/fraud. Promoter pays fair value to shareholders. If not paid, trading in "permitted category" for 1 year. <strong>Voluntary</strong>: Company\'s choice. Needs special resolution. Reverse Book Building for price. Exit given by promoters.'},
+  {cat:'misc',emoji:'🌱',q:'What is the Social Stock Exchange (SSE)?',a:'SEBI-regulated segment for social organizations (NPOs, FPEs) to raise funds. Operates on BSE SSE and NSE SSE. NPOs issue ZCZP bonds (zero coupon, zero principal = pure donation). FPEs can list equity/debt. Min 67% activity in 16 social areas.'},
+  {cat:'misc',emoji:'📋',q:'What is a ZCZP Bond?',a:'Zero Coupon Zero Principal bond. Used on Social Stock Exchange by NPOs. Zero coupon = no interest paid. Zero principal = no capital repaid. Essentially a structured donation. NPOs cannot raise via equity or traditional debt on SSE.'},
+  {cat:'misc',emoji:'🏦',q:'What is Retained Earnings?',a:'Profits kept by a company instead of being distributed as dividends. Reserved for future business needs, expansion, etc. Affects how much dividend is paid to equity shareholders.'},
+];
+
+let filteredCards = [...allCards];
+let currentCard = 0;
+let isFlipped = false;
+
+function filterCards(cat, btn) {
+  filteredCards = cat==='all' ? [...allCards] : allCards.filter(c=>c.cat===cat);
+  currentCard=0; isFlipped=false;
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.querySelectorAll('.fc-cats .s-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderCard();
+}
+function renderCard() {
+  if(!filteredCards.length) return;
+  const c = filteredCards[currentCard];
+  document.getElementById('fc-emoji').textContent = c.emoji;
+  document.getElementById('fc-q').textContent = c.q;
+  document.getElementById('fc-a').innerHTML = c.a;
+  const pct = Math.round(((currentCard+1)/filteredCards.length)*100);
+  document.getElementById('fc-counter').textContent = `${currentCard+1} / ${filteredCards.length}`;
+  document.getElementById('fc-bar-fill').style.width = pct+'%';
+  document.getElementById('fc-pct').textContent = pct+'%';
+  document.getElementById('cnt-all').textContent = allCards.length;
+}
+function flipCard() {
+  isFlipped = !isFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', isFlipped);
+}
+function nextCard() {
+  currentCard=(currentCard+1)%filteredCards.length;
+  isFlipped=false;
+  document.getElementById('flashcard').classList.remove('flipped');
+  renderCard();
+}
+function prevCard() {
+  currentCard=(currentCard-1+filteredCards.length)%filteredCards.length;
+  isFlipped=false;
+  document.getElementById('flashcard').classList.remove('flipped');
+  renderCard();
+}
+
+// ── QUIZ ──
+const allQuestions = [
+  {q:'What percentage of IPO size is reserved for QIBs?',opts:['35%','50%','15%','25%'],ans:1,exp:'SEBI mandates 50% for QIBs, 35% for Retail Investors (RII), and 15% for Non-Institutional Investors (NIIs/HNIs).'},
+  {q:'A company offers shares to the public for the FIRST TIME. This is:',opts:['FPO','Rights Issue','IPO','Private Placement'],ans:2,exp:'IPO (Initial Public Offering) converts a private company to public by offering shares for the first time. FPO is done by already-listed companies.'},
+  {q:'In which year was ASBA introduced by SEBI?',opts:['2006','2008','2012','2016'],ans:1,exp:'ASBA was introduced in 2008. It was made mandatory for retail investors in 2016. UPI was added as a payment mode in 2018.'},
+  {q:'The process of issuing preference shares by a company is called:',opts:['Rights Issue','Initial Issue','Preferential Issue','Fixed Issue'],ans:2,exp:'The process of issuing preference shares by a company is specifically called a Preferential Issue.'},
+  {q:'What is the minimum IPO subscription required by SEBI?',opts:['75%','80%','90%','100%'],ans:2,exp:'At least 90% of the net offer must be subscribed. If below 90%, the company must refund all subscription amounts within 4 days. Late refund = 15% interest p.a.'},
+  {q:'SENSEX was launched on:',opts:['January 1, 1980','January 1, 1986','January 1, 1992','January 1, 2000'],ans:1,exp:'SENSEX (Sensitivity Index) was introduced by BSE on January 1, 1986. BSE itself was established in 1875. SENSEX comprises 30 stocks.'},
+  {q:'Which type of prospectus is issued ONLY during a Rights Issue?',opts:['Red Herring Prospectus','Abridged Prospectus','Letter of Offer','Green Prospectus'],ans:2,exp:'A Letter of Offer is issued specifically when a company goes for a Rights Issue. Red Herring and Abridged Prospectus are for IPOs.'},
+  {q:'In a Bonus Issue, how much does a shareholder pay?',opts:['Market price','Face value only','Discounted price','Nothing — shares are FREE'],ans:3,exp:'Bonus shares are issued FREE to existing shareholders as an alternative to cash dividends. No money is collected. Company issues no cash flow.'},
+  {q:'What is the maximum band gap allowed in Book Building (SEBI)?',opts:['10%','15%','20%','25%'],ans:2,exp:'SEBI mandates that the difference between upper and lower price bands in book building cannot exceed 20%. Example: Floor ₹100 → Cap cannot exceed ₹120.'},
+  {q:'DR holders get which of the following?',opts:['Voting rights only','Dividends and voting rights','Dividends ONLY','Neither dividends nor voting rights'],ans:2,exp:'Holders of Depository Receipts (ADR/GDR/IDR) receive DIVIDENDS ONLY. They do NOT get any voting rights in the company.'},
+  {q:'What is the maximum period for which preference shares can be issued for infrastructure companies?',opts:['10 years','20 years','30 years','40 years'],ans:2,exp:'Per Section 55, Companies Act 2013: regular companies = max 20 years. INFRASTRUCTURE companies = max 30 years from date of issue.'},
+  {q:'In Private Placement, the offer can be made to maximum how many persons?',opts:['100','200','500','1000'],ans:1,exp:'As per Companies Act 2013, a private placement offer can be made to NOT MORE THAN 200 persons. SEBI\'s public issue regulations do not apply to private placements.'},
+  {q:'NSE\'s index NIFTY comprises how many stocks?',opts:['25','30','50','100'],ans:2,exp:'NIFTY (National Fifty) comprises 50 stocks from different sectors. SENSEX (BSE) comprises 30 stocks. Both reflect overall market sentiment.'},
+  {q:'Which entity holds your shares in electronic form?',opts:['Broker','SEBI','Depository (NSDL/CDSL)','Clearing Corporation'],ans:2,exp:'Depositories — NSDL (National Securities Depository Ltd) and CDSL (Central Depository Services Ltd) — hold your shares electronically in your Demat account.'},
+  {q:'A Block Deal requires a minimum transaction value of:',opts:['₹5 crore','₹10 crore','₹25 crore','₹50 crore'],ans:2,exp:'A Block Deal focuses on VALUE and requires a minimum of ₹25 crore per transaction. It can only be executed in two specific time windows during the trading day.'},
+  {q:'ADR stands for — and where is it traded?',opts:['Asian Depository Receipt — Asia','American Depository Receipt — USA only','All Depository Receipt — Worldwide','American Depository Receipt — Worldwide'],ans:1,exp:'ADR = American Depository Receipt. Traded ONLY on US financial markets (NYSE, NASDAQ etc.) in US Dollars. GDR is for all other international markets except USA.'},
+  {q:'The Anchor Investor concept was introduced by SEBI on:',opts:['June 18, 2007','June 18, 2008','June 18, 2009','June 18, 2010'],ans:2,exp:'SEBI introduced the Anchor Investor concept on June 18, 2009. Purpose: enhance issuer\'s ability to sell, generate confidence in retail investors, and enable better price discovery.'},
+  {q:'In an Offer for Sale (OFS), the money goes to:',opts:['The company','The government','Existing shareholders (promoters)','SEBI'],ans:2,exp:'In OFS, existing shareholders (promoters/early investors) sell their existing shares. The company does NOT receive any money. Money flows to the SELLING shareholders.'},
+  {q:'P-Notes (Participatory Notes) CANNOT be issued to:',opts:['Overseas institutional investors','Foreign hedge funds','Indian Nationals, NRIs, and PIOs','Non-resident aliens'],ans:2,exp:'P-Notes cannot be issued to Indian Nationals, Persons of Indian Origin (PIOs), or NRIs. This prevents misuse of P-Notes as a money laundering route into Indian markets.'},
+  {q:'The Green Shoe Option allows allotment of extra shares up to:',opts:['10% of issue size','15% of issue size','20% of issue size','25% of issue size'],ans:1,exp:'Green Shoe Option allows allotment of additional shares up to 15% of IPO issue size. Proceeds kept separately and used to support share price for 30 days from listing.'},
+  {q:'Which clearing corporation handles NSE trades?',opts:['ICCL','CDSL','NSCCL','NSDL'],ans:2,exp:'NSCCL (National Securities Clearing Corporation Ltd.) is the clearing corporation for NSE. ICCL (Indian Clearing Corporation Ltd.) handles BSE trades. India has 5 clearing corporations total.'},
+  {q:'ESOP shares are issued to:',opts:['General public','Existing shareholders','Company employees','Institutional investors'],ans:2,exp:'ESOP = Employee Stock Option Plan. Shares issued ONLY to employees of the company. ESOP recipients are called INTERNAL SHAREHOLDERS as they\'re actively involved in company operations.'},
+  {q:'The Depositories Act 1996 was enacted primarily to:',opts:['Regulate stock exchanges','Prevent insider trading','Enable dematerialization of securities','Regulate mutual funds'],ans:2,exp:'The Depositories Act 1996 facilitates establishment of depositories and promotes dematerialization — converting physical share certificates to electronic form for efficient transfer.'},
+  {q:'Bulk Deal threshold is:',opts:['More than 0.5% of listed shares','More than 1% of listed shares','Value exceeds ₹25 crore','More than 5% of listed shares'],ans:0,exp:'A Bulk Deal = total quantity of shares bought/sold is MORE THAN 0.5% of the listed equity shares. Bulk deals focus on QUANTITY. Block deals focus on VALUE (min ₹25 crore).'},
+  {q:'If an IPO is undersubscribed (below 90%), the refund must happen within:',opts:['2 days','4 days','7 days','15 days'],ans:1,exp:'If minimum 90% subscription is not achieved, the company must refund all subscription amounts within 4 DAYS from closure. If delayed beyond this, 15% interest per annum is levied.'},
+  {q:'What is the minimum investment to qualify as an Anchor Investor (updated)?',opts:['₹2 crore','₹5 crore','₹10 crore','₹25 crore'],ans:1,exp:'SEBI reduced the minimum application size for an anchor investor from ₹10 crore to ₹5 crore. This widened institutional participation in the anchor investor category.'},
+  {q:'IOSCO stands for:',opts:['Indian Organization of Securities Commissions','International Organization of Securities Commissions','International Order of Securities Control','Indian Order of Stock Commissions'],ans:1,exp:'IOSCO = International Organization of Securities Commissions. Global body setting standards for securities markets — ensures fairness, transparency, investor protection worldwide.'},
+  {q:'For Social Stock Exchange eligibility, what minimum % of revenue/activity must be in SEBI\'s social areas?',opts:['50%','60%','67%','75%'],ans:2,exp:'To qualify for SSE, an NPO or FPE must have at least 67% of revenue, expenditure, or beneficiaries linked to one or more of SEBI\'s 16 broad social activity areas.'},
+  {q:'In rights issue, "Renunciation of Rights" means:',opts:['Shareholder demands more shares','Shareholder buys all available shares at full price','Shareholder declines rights and can sell them to others','Shareholder transfers rights to the company'],ans:2,exp:'Renunciation = shareholder DECLINES the rights issue offer and may sell their rights entitlements to other investors on the open market. They don\'t have to participate in the rights issue.'},
+  {q:'BSE was founded in which year?',opts:['1857','1875','1947','1956'],ans:1,exp:'BSE (Bombay Stock Exchange) was founded in 1875, making it India\'s OLDEST stock exchange. It was also the FIRST stock exchange to receive SEBI recognition. Located on Dalal Street, Mumbai.'},
+];
+
+let currentQ=0, score=0, answered=false, quizStarted=false;
+
+function renderQuestion() {
+  if(!quizStarted){quizStarted=true;currentQ=0;score=0;}
+  document.getElementById('q-display').style.display='block';
+  document.getElementById('quiz-result-area').style.display='none';
+  if(currentQ>=allQuestions.length){showResult();return;}
+  const q=allQuestions[currentQ];
+  document.getElementById('q-num').textContent=`Question ${currentQ+1} of ${allQuestions.length}`;
+  document.getElementById('q-text').textContent=q.q;
+  document.getElementById('score-display').textContent=score;
+  document.getElementById('total-display').textContent=currentQ;
+  const opts=document.getElementById('q-options');
+  opts.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt'; btn.textContent=o;
+    btn.onclick=()=>selectAnswer(i);
+    opts.appendChild(btn);
+  });
+  document.getElementById('q-explanation').className='explanation';
+  document.getElementById('q-next').className='q-next';
+  answered=false;
+}
+function selectAnswer(idx){
+  if(answered)return;
+  answered=true;
+  const q=allQuestions[currentQ];
+  document.querySelectorAll('.opt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===q.ans) b.classList.add('correct');
+    else if(i===idx&&idx!==q.ans) b.classList.add('wrong');
+  });
+  if(idx===q.ans) score++;
+  document.getElementById('score-display').textContent=score;
+  const exp=document.getElementById('q-explanation');
+  exp.innerHTML='💡 '+q.exp;
+  exp.className='explanation show';
+  document.getElementById('q-next').className='q-next show';
+}
+function nextQuestion(){currentQ++;renderQuestion();}
+function showResult(){
+  document.getElementById('q-display').style.display='none';
+  document.getElementById('quiz-result-area').style.display='block';
+  const pct=Math.round((score/allQuestions.length)*100);
+  const el=document.getElementById('final-score');
+  el.textContent=pct+'%';
+  el.className='big-score '+(pct>=80?'great':pct>=50?'ok':'low');
+  document.getElementById('result-msg').textContent=pct>=80?'🎉 Excellent! You\'re ready!':pct>=50?'👍 Good Effort! Review weak areas.':'💪 Keep Revising! You\'ve got this.';
+  document.getElementById('result-sub').textContent=`You got ${score} out of ${allQuestions.length} correct.`;
+}
+function restartQuiz(){quizStarted=false;renderQuestion();}
+
+// init
+renderCard();
+document.getElementById('cnt-all').textContent=allCards.length;
+</script>
+</body>
+</html>
